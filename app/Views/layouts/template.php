@@ -66,6 +66,9 @@
     </div>
     <!--end::App Wrapper-->
     <!--begin::Script-->
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <script
         src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
@@ -111,6 +114,14 @@
         src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
         integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8="
         crossorigin="anonymous"></script>
+
+    <!-- custom js -->
+    <!-- <script src="dist/js/main.js"></script> -->
+    <script>
+        $(document).ready(function() {
+            alert("anjay");
+        })
+    </script>
     <!--end::Script-->
 </body>
 <!--end::Body-->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 09, 2025 at 09:08 AM
+-- Generation Time: Apr 11, 2025 at 05:33 PM
 -- Server version: 8.0.41-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -35,6 +35,14 @@ CREATE TABLE `items` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`item_id`, `item_name`, `price`, `stock`, `created_at`, `updated_at`) VALUES
+(1, 'pen', 5000, 300, '2025-04-09 20:58:04', '2025-04-09 20:58:04'),
+(2, 'book', 6000, 250, '2025-04-09 20:58:04', '2025-04-09 20:58:04');
 
 -- --------------------------------------------------------
 
@@ -134,7 +142,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transactions`

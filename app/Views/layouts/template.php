@@ -117,7 +117,6 @@
 
     <!-- custom js -->
     <script src="js/user-management.js"></script>
-
     <!--end::Script-->
 </body>
 <!--end::Body-->

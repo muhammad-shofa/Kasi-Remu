@@ -17,4 +17,11 @@ class PagesController extends BaseController
 
         return view("pages/user-management", $data);
     }
+
+    public function itemManagement()
+    {
+        $data = ['title' => "Item Management"];
+
+        return view("pages/item-management", $data);
+    }
 }

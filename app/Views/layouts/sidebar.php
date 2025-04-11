@@ -44,7 +44,7 @@
 
                 <!-- item management -->
                 <li class="nav-item">
-                    <a href="#0" class="nav-link">
+                    <a href="/item-management" class="nav-link">
                         <i class="nav-icon bi bi-box-seam"></i>
                         <p>Item Management</p>
                     </a>

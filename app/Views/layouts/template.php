@@ -119,7 +119,22 @@
     <!-- <script src="dist/js/main.js"></script> -->
     <script>
         $(document).ready(function() {
-            alert("anjay");
+            $.ajax({
+                url: "/api/get-users",
+                type: "GET",
+                dataType: "json",
+                success: (response) => {
+                    if (response.success) {
+                        console.log(response);
+                        console.log(response.data);
+                    }
+                },
+                error: (xhr, error, status) => {
+                    console.log(xhr);
+                    console.log(error);
+                    console.log(status);
+                }
+            })
         })
     </script>
     <!--end::Script-->

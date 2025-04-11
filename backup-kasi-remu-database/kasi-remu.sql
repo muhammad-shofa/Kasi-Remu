@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 11, 2025 at 05:33 PM
+-- Generation Time: Apr 11, 2025 at 06:08 PM
 -- Server version: 8.0.41-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -89,6 +89,7 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `gender` enum('M','W') NOT NULL,
   `role` enum('admin','cashier','manager') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
@@ -98,10 +99,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `email`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin', 'admin123', 'admin@gmail.com', 'admin', '2025-04-09 16:06:07', '2025-04-09 16:06:07'),
-(2, 'Wyxli', 'wyxli', '$2y$10$XdQQuK7Yh5lwo2s8pNxplexijPud8P1FdgQA43Q4XbjROqk9MmVWW', 'wyxli@gmail.com', 'cashier', '2025-04-09 16:06:07', '2025-04-09 16:06:07'),
-(3, 'Andreas', 'andreas', '$2y$10$ybmS69mh/A6nThsFTFdhtuEqQXn0QGwdqyLER6HlwPbviAEWcCyLm', 'andreas@gmail.com', 'manager', '2025-04-09 16:06:07', '2025-04-09 16:06:07');
+INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `email`, `gender`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin', 'admin123', 'admin@gmail.com', 'M', 'admin', '2025-04-09 16:06:07', '2025-04-09 16:06:07'),
+(2, 'Wyxli', 'wyxli', '$2y$10$XdQQuK7Yh5lwo2s8pNxplexijPud8P1FdgQA43Q4XbjROqk9MmVWW', 'wyxli@gmail.com', 'M', 'cashier', '2025-04-09 16:06:07', '2025-04-09 16:06:07'),
+(3, 'Andreas', 'andreas', '$2y$10$ybmS69mh/A6nThsFTFdhtuEqQXn0QGwdqyLER6HlwPbviAEWcCyLm', 'andreas@gmail.com', 'M', 'manager', '2025-04-09 16:06:07', '2025-04-09 16:06:07');
 
 --
 -- Indexes for dumped tables

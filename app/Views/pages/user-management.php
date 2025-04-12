@@ -41,6 +41,7 @@
                                 <th>Name</th>
                                 <th>Username</th>
                                 <th>Email</th>
+                                <th>Gender</th>
                                 <th>Role</th>
                                 <th style="width: 60px">Action</th>
                             </tr>
@@ -51,6 +52,54 @@
                 </div>
                 <!-- /.card-body -->
             </div>
+
+            <!-- edit modal -->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5">Edit User</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="hidden" id="editUserId">
+                                <div class="mb-3">
+                                    <label for="editName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="editName" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editUsername" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="editUsername" />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="editEmail" />
+                                </div>
+                                <div class="md-3">
+                                    <label for="editGender" class="form-label">Gender</label>
+                                    <select class="form-select" id="editGender">
+                                        <option selected value="M">M</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                </div>
+                                <div class="md-3">
+                                    <label for="editRole" class="form-label">Role</label>
+                                    <select class="form-select" id="editRole">
+                                        <option selected value="admin">Admin</option>
+                                        <option value="cashier">Cashier</option>
+                                        <option value="manager">Manager</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="save-edit btn btn-warning">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
         <!--end::Container-->

@@ -11,5 +11,7 @@ $routes->get('/', 'PagesController::dashboard');
 $routes->get('/user-management', 'PagesController::userManagement');
 $routes->get('/item-management', 'PagesController::itemManagement');
 
-// endpoint
-$routes->get("/api/get-users", "UserController::getUsers");
+// user endpoint
+$routes->get("/api/user/get-users", "UserController::getUsers");
+$routes->get("/api/user/get-edit/(:num)", "UserController::getEdit/$1");
+$routes->post("/api/user/save-edit/(:num)", "UserController::saveEdit/$1");

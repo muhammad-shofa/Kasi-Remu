@@ -67,6 +67,10 @@
                     <input type="text" class="form-control" id="username" />
                 </div>
                 <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" id="password" />
+                </div>
+                <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" />
                 </div>
@@ -90,7 +94,7 @@
 
             <!-- masukkan modal footer -->
             <?php ob_start() ?>
-            <button type="button" class="save-edit btn btn-warning">Save Changes</button>
+            <button type="button" class="save-add btn btn-warning">Save Changes</button>
             <?php $modalFooterAdd = ob_get_clean() ?>
 
             <!-- kirim ke layouts/modal -->

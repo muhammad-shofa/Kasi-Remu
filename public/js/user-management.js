@@ -45,6 +45,39 @@ $(document).ready(function () {
   // load user data
   loadUserData();
 
+  // add new user
+  $(document).on("click", ".save-add", function () {
+    let formData = {
+      name: $("#name").val(),
+      username: $("#username").val(),
+      password: $("#password").val(),
+      email: $("#email").val(),
+      gender: $("#gender").val(),
+      role: $("#role").val(),
+    };
+
+    $.ajax({
+      url: "/api/user/add-user",
+      type: "POST",
+      dataType: "json",
+      data: formData,
+      success: (response) => {
+        console.log(response);
+        if (response.success) {
+          console.log(response.message);
+          loadUserData();
+
+          $("#addModal").modal("hide");
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
+
   // get edit (when edit-action btn clicked)
   $(document).on("click", ".edit-action", function () {
     let user_id = $(this).data("user_id");

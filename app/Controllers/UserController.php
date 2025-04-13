@@ -17,6 +17,25 @@ class UserController extends BaseController
         $this->userModel = new UserModel();
     }
 
+    // add user
+    public function addUser()
+    {
+        $data = $this->request->getPost();
+
+        $password_hash = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        $data['password'] = $password_hash;
+
+        $addDataStatus = $this->userModel->save($data);
+
+        if ($addDataStatus) {
+            return $this->response->setJSON(['success' => true, 'message' => 'New user successfully added']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Failed to add user']);
+        }
+    }
+
+    // get all user
     public function getUsers()
     {
         $data = $this->userModel->findAll();
@@ -24,6 +43,7 @@ class UserController extends BaseController
         return $this->response->setJSON(['success' => true, 'data' => $data]);
     }
 
+    // get specified user for edit
     public function getEdit($user_id = 0)
     {
         $data = $this->userModel->find($user_id);
@@ -31,6 +51,7 @@ class UserController extends BaseController
         return $this->response->setJSON(['success' => true, 'data' => $data]);
     }
 
+    // save edit user
     public function saveEdit($user_id = 0)
     {
         $formData = $this->request->getPost();

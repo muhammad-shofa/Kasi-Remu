@@ -19,7 +19,7 @@
     <div class="app-content">
         <!--begin::Container-->
         <div class="container-fluid">
-            <button type="button" class="add-action btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#addModal">Add User</button>
+            <button type="button" class="add-action btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addModal">Add User</button>
             <div class="card mb-4">
                 <div class="card-header">
                     <h3 class="card-title">User Table</h3>
@@ -99,7 +99,7 @@
 
             <!-- masukkan modal footer -->
             <?php ob_start() ?>
-            <button type="button" class="save-add btn btn-warning">Save Changes</button>
+            <button type="button" class="save-add btn btn-primary">Save User</button>
             <?php $modalFooterAdd = ob_get_clean() ?>
 
             <!-- kirim ke layouts/modal -->

@@ -24,4 +24,11 @@ class PagesController extends BaseController
 
         return view("pages/item-management", $data);
     }
+
+    public function login()
+    {
+        $data = ['title' => 'Login'];
+
+        return view("pages/auth/login");
+    }
 }

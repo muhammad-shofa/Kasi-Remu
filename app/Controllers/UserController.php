@@ -64,4 +64,11 @@ class UserController extends BaseController
             return $this->response->setJSON(['success' => false, 'message' => 'Failed to update user']);
         }
     }
+
+    public function deleteUser($user_id = 0)
+    {
+        $this->userModel->delete($user_id);
+
+        return $this->response->setJSON(['success' => true, 'message' => 'User deleted successfully']);
+    }
 }

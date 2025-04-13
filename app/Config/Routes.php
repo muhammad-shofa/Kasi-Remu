@@ -16,3 +16,4 @@ $routes->get("/api/user/get-users", "UserController::getUsers");
 $routes->post("/api/user/add-user", "UserController::addUser");
 $routes->get("/api/user/get-edit/(:num)", "UserController::getEdit/$1");
 $routes->post("/api/user/save-edit/(:num)", "UserController::saveEdit/$1");
+$routes->delete('/api/user/delete-user/(:num)', 'UserController::deleteUser/$1');

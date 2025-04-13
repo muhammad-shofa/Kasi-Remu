@@ -7,10 +7,11 @@ $(document).ready(function () {
       dataType: "json",
       success: (response) => {
         if (response.success) {
-          // console.log(response);
           // console.log(response.data);
           let row = "";
           let no = 0;
+
+          // if (response.data.length != 0) {
           response.data.forEach((user) => {
             no++;
             row += `
@@ -24,12 +25,15 @@ $(document).ready(function () {
                         <td>
                             <div class="btn-group mb-2" role="group">
                                 <button type="button" class="edit-action btn btn-warning" data-user_id="${user["user_id"]}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                <button type="button" class="delete-action btn btn-danger" data-user_id="${user["user_id"]}">Delete</button>
+                                <button type="button" class="delete-action btn btn-danger" data-user_id="${user["user_id"]}" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                             </div>
                         </td>
                     </tr>
                     `;
           });
+          // } else {
+          //   $(".no-data-yet").html("<p>No users yet</p>");
+          // }
 
           $("#userTableData").html(row);
         }
@@ -62,12 +66,18 @@ $(document).ready(function () {
       dataType: "json",
       data: formData,
       success: (response) => {
-        console.log(response);
         if (response.success) {
           console.log(response.message);
           loadUserData();
 
-          $("#addModal").modal("hide");
+          // reset
+          $("#name").val(""),
+            $("#username").val(""),
+            $("#password").val(""),
+            $("#email").val(""),
+            $("#gender").val(""),
+            $("#role").val(""),
+            $("#addModal").modal("hide");
         }
       },
       error: (xhr, error, status) => {
@@ -125,12 +135,43 @@ $(document).ready(function () {
       dataType: "json",
       data: formData,
       success: (response) => {
-        console.log(response);
         if (response.success) {
           console.log(response.message);
           loadUserData();
 
           $("#editModal").modal("hide");
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
+
+  // delete user confirmation
+  $(document).on("click", ".delete-action", function () {
+    let user_id = $(this).data("user_id");
+    $("#deleteUserId").val(user_id);
+  });
+
+  // confirmed deletion
+  $(document).on("click", ".confirmed-deletion", function () {
+    let user_id = $("#deleteUserId").val();
+
+    // console.log(user_id + "dari delete action");
+
+    $.ajax({
+      url: "/api/user/delete-user/" + user_id,
+      type: "DELETE",
+      dataType: "json",
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          loadUserData();
+
+          $("#deleteModal").modal("hide");
         }
       },
       error: (xhr, error, status) => {

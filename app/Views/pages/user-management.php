@@ -48,6 +48,11 @@
                             </tr>
                         </thead>
                         <tbody id="userTableData">
+                            <tr>
+                                <td colspan="7" class="text-center border">
+                                    <p class="fw-bold no-data-yet">No users yet</p>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -154,6 +159,25 @@
                 'modalFooter' => $modalFooterEdit
             ]) ?>
 
+            <!-- delete modal -->
+            <!-- masukkan modal body -->
+            <?php ob_start() ?>
+            <input type="hidden" id="deleteUserId">
+            <p>Are you sure you want to delete this user?</p>
+            <?php $modalBodyDelete = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="confirmed-deletion btn btn-danger">Yes</button>
+            <?php $modalFooterDelete = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalId' => 'deleteModal',
+                'modalTitle' => 'Delete User',
+                'modalBody' => $modalBodyDelete,
+                'modalFooter' => $modalFooterDelete
+            ]) ?>
 
         </div>
         <!--end::Container-->

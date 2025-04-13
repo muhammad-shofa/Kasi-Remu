@@ -19,6 +19,7 @@
     <div class="app-content">
         <!--begin::Container-->
         <div class="container-fluid">
+            <button type="button" class="add-action btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#addModal">Add User</button>
             <div class="card mb-4">
                 <div class="card-header">
                     <h3 class="card-title">User Table</h3>
@@ -53,52 +54,101 @@
                 <!-- /.card-body -->
             </div>
 
-            <!-- edit modal -->
-            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5">Edit User</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <input type="hidden" id="editUserId">
-                                <div class="mb-3">
-                                    <label for="editName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="editName" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editUsername" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="editUsername" />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="editEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="editEmail" />
-                                </div>
-                                <div class="md-3">
-                                    <label for="editGender" class="form-label">Gender</label>
-                                    <select class="form-select" id="editGender">
-                                        <option selected value="M">M</option>
-                                        <option value="W">W</option>
-                                    </select>
-                                </div>
-                                <div class="md-3">
-                                    <label for="editRole" class="form-label">Role</label>
-                                    <select class="form-select" id="editRole">
-                                        <option selected value="admin">Admin</option>
-                                        <option value="cashier">Cashier</option>
-                                        <option value="manager">Manager</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="save-edit btn btn-warning">Save Changes</button>
-                        </div>
-                    </div>
+            <!-- tambah user modal -->
+            <!-- masukkan modal body -->
+            <?php ob_start() ?>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" />
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" />
+                </div>
+                <div class="md-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select class="form-select" id="gender">
+                        <option selected value="M">M</option>
+                        <option value="W">W</option>
+                    </select>
+                </div>
+                <div class="md-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select class="form-select" id="role">
+                        <option selected value="admin">Admin</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="manager">Manager</option>
+                    </select>
+                </div>
+            </form>
+            <?php $modalBodyAdd = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="save-edit btn btn-warning">Save Changes</button>
+            <?php $modalFooterAdd = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalId' => 'addModal',
+                'modalTitle' => 'Add User',
+                'modalBody' => $modalBodyAdd,
+                'modalFooter' => $modalFooterAdd
+            ]) ?>
+
+
+            <!-- edit modal -->
+            <!-- masukkan modal body -->
+            <?php ob_start() ?>
+            <form>
+                <input type="hidden" id="editUserId">
+                <div class="mb-3">
+                    <label for="editName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="editName" />
+                </div>
+                <div class="mb-3">
+                    <label for="editUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="editUsername" />
+                </div>
+                <div class="mb-3">
+                    <label for="editEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="editEmail" />
+                </div>
+                <div class="md-3">
+                    <label for="editGender" class="form-label">Gender</label>
+                    <select class="form-select" id="editGender">
+                        <option selected value="M">M</option>
+                        <option value="W">W</option>
+                    </select>
+                </div>
+                <div class="md-3">
+                    <label for="editRole" class="form-label">Role</label>
+                    <select class="form-select" id="editRole">
+                        <option selected value="admin">Admin</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="manager">Manager</option>
+                    </select>
+                </div>
+            </form>
+            <?php $modalBodyEdit = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="save-edit btn btn-warning">Save Changes</button>
+            <?php $modalFooterEdit = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalId' => 'editModal',
+                'modalTitle' => 'Edit User',
+                'modalBody' => $modalBodyEdit,
+                'modalFooter' => $modalFooterEdit
+            ]) ?>
 
 
         </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 11, 2025 at 06:08 PM
+-- Generation Time: Apr 14, 2025 at 02:38 PM
 -- Server version: 8.0.41-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `items` (
   `item_id` int NOT NULL,
-  `item_name` varchar(100) NOT NULL,
+  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `category` varchar(150) NOT NULL,
   `price` int NOT NULL,
   `stock` int NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -40,9 +41,11 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `price`, `stock`, `created_at`, `updated_at`) VALUES
-(1, 'pen', 5000, 300, '2025-04-09 20:58:04', '2025-04-09 20:58:04'),
-(2, 'book', 6000, 250, '2025-04-09 20:58:04', '2025-04-09 20:58:04');
+INSERT INTO `items` (`item_id`, `name`, `category`, `price`, `stock`, `created_at`, `updated_at`) VALUES
+(1, 'Pen', 'School and Office', 5000, 300, '2025-04-09 20:58:04', '2025-04-09 20:58:04'),
+(2, 'Book', 'School and Office', 6000, 250, '2025-04-09 20:58:04', '2025-04-09 20:58:04'),
+(3, 'Apple', 'Fruits', 4000, 430, '2025-04-14 21:04:53', '2025-04-14 21:04:53'),
+(4, 'Mango', 'Fruits', 6000, 320, '2025-04-14 21:04:53', '2025-04-14 21:04:53');
 
 -- --------------------------------------------------------
 
@@ -100,9 +103,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `email`, `gender`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin', 'admin123', 'admin@gmail.com', 'M', 'admin', '2025-04-09 16:06:07', '2025-04-09 16:06:07'),
-(2, 'Wyxli', 'wyxli', '$2y$10$XdQQuK7Yh5lwo2s8pNxplexijPud8P1FdgQA43Q4XbjROqk9MmVWW', 'wyxli@gmail.com', 'M', 'cashier', '2025-04-09 16:06:07', '2025-04-09 16:06:07'),
-(3, 'Andreas', 'andreas', '$2y$10$ybmS69mh/A6nThsFTFdhtuEqQXn0QGwdqyLER6HlwPbviAEWcCyLm', 'andreas@gmail.com', 'M', 'manager', '2025-04-09 16:06:07', '2025-04-09 16:06:07');
+(11, 'Wyxli', 'wyxli', '$2y$10$WDHHPvr6D/dzVQe6uwApbun7nxFZ//hL4Dm.33z0qBRGLmK0fUv2K', 'wyxli@gmail.com', 'M', 'manager', '2025-04-13 05:42:55', '2025-04-13 05:43:23'),
+(12, 'Admin', 'admin', '$2y$10$nySugSgqZAUOW8Yyhi6QaODmwjADiioyO6fB6plN.AWu49hna0Sve', 'admin@gmail.com', 'M', 'admin', '2025-04-13 05:43:17', '2025-04-13 05:43:17'),
+(13, 'Andreas', 'andreas', '$2y$10$7.NgVVSO/i05PlyU3hSzruTF1hoIv.s2cM20nsiTArZoqLE4EkiJW', 'andreas@gmail.com', 'M', 'cashier', '2025-04-13 05:45:28', '2025-04-13 05:45:28'),
+(14, 'test', 'test', '$2y$10$IGW0UY6DVMHLjtW0GLKz6u2eRLn9JgCD57jxwFVwJaNdsBatYyy6S', 'test@gmail.com', 'W', 'manager', '2025-04-14 12:02:10', '2025-04-14 12:02:10');
 
 --
 -- Indexes for dumped tables
@@ -133,7 +137,9 @@ ALTER TABLE `transaction_details`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -143,7 +149,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -161,7 +167,7 @@ ALTER TABLE `transaction_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

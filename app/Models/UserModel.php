@@ -37,7 +37,10 @@ class UserModel extends Model
     // protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules      = [
+        'username' => 'is_unique[users.username]',
+        'email' => 'is_unique[users.email]'
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

@@ -19,6 +19,7 @@
     <div class="app-content">
         <!--begin::Container-->
         <div class="container-fluid">
+            <button type="button" class="add-action btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#addModal">Add Item</button>
             <div class="card mb-4">
                 <div class="card-header">
                     <h3 class="card-title">Item Table</h3>
@@ -30,6 +31,7 @@
                             <tr>
                                 <th style="width: 10px">No</th>
                                 <th>Name</th>
+                                <th>Category</th>
                                 <th>Price</th>
                                 <th>Stock</th>
                                 <th style="width: 60px">Action</th>
@@ -52,4 +54,8 @@
     </div>
 </main>
 
+<?= $this->endSection() ?>
+
+<?= $this->section("script") ?>
+<script src="js/item-management.js"></script>
 <?= $this->endSection() ?>

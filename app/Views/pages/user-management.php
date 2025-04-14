@@ -185,3 +185,7 @@
 </main>
 
 <?= $this->endSection() ?>
+
+<?= $this->section("script") ?>
+<script src="js/user-management.js"></script>
+<?= $this->endSection() ?>

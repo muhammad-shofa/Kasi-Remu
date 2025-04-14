@@ -116,7 +116,9 @@
         crossorigin="anonymous"></script>
 
     <!-- custom js -->
-    <script src="js/user-management.js"></script>
+    <?= $this->renderSection("script") ?>
+    <!-- <script src="js/user-management.js"></script> -->
+    <!-- <script src="js/item-management.js"></script> -->
     <!--end::Script-->
 </body>
 <!--end::Body-->

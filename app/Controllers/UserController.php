@@ -46,6 +46,7 @@ class UserController extends BaseController
     // get specified user for edit
     public function getEdit($user_id = 0)
     {
+
         $data = $this->userModel->find($user_id);
 
         return $this->response->setJSON(['success' => true, 'data' => $data]);
@@ -56,7 +57,17 @@ class UserController extends BaseController
     {
         $formData = $this->request->getPost();
 
-        // $this->userModel->update($user_id, $formData);
+        // $data = $this->userModel->find($user_id); //
+
+        // $rules = [
+        //     "username" => "is_unique[users.username,user_id,{$user_id}]",
+        //     "email" => "is_unique[users.email,user_id,{$user_id}]"
+        // ];
+
+        // if (!$this->validate($rules)) {
+        //     return $this->response->setJSON(['success' => false, 'message' => "Duplicated data"]);
+        // }
+
         $updateDataStatus = $this->userModel->update($user_id, $formData);
         if ($updateDataStatus) {
             return $this->response->setJSON(['success' => true, 'message' => 'User updated successfully']);
@@ -70,5 +81,23 @@ class UserController extends BaseController
         $this->userModel->delete($user_id);
 
         return $this->response->setJSON(['success' => true, 'message' => 'User deleted successfully']);
+    }
+
+    // - AUTH -
+    public function login()
+    {
+        $loginUsnEmail = $this->request->getPost("usnEmail");
+        $loginPassword = $this->request->getPost("password");
+
+        // cari apakah ada username atau email yang sesuai
+        $user =  $this->userModel->where("username", $loginUsnEmail)->orWhere("email", $loginUsnEmail)->first();
+
+        if ($user && password_verify($loginPassword, $user['password'])) {
+            return $this->response->setJSON(['success' => true, 'message' => 'Login Successfull']);
+        } else {
+            return $this->response->setJSON(['success' => false, 'message' => 'Login Failed']);
+        }
+
+        return $this->response->setJSON(['success' => false, 'message' => 'Username or password invalid']);
     }
 }

@@ -140,6 +140,8 @@ $(document).ready(function () {
           loadUserData();
 
           $("#editModal").modal("hide");
+        } else {
+          console.log(response.message);
         }
       },
       error: (xhr, error, status) => {

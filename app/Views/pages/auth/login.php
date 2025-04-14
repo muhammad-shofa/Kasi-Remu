@@ -38,7 +38,7 @@
         crossorigin="anonymous" />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../../../dist/css/adminlte.css" />
+    <link rel="stylesheet" href="dist/css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
 </head>
 <!--end::Head-->
@@ -55,20 +55,20 @@
                 <!-- </a> -->
             </div>
             <div class="card-body login-card-body pt-5">
-                <form action="../index3.html" method="post">
+                <form id="loginForm" method="post">
                     <div class="input-group mb-3">
+                        <div class="input-group-text"><span class="bi bi-person-fill"></span></div>
                         <div class="form-floating">
-                            <input id="loginEmail" type="email" class="form-control" value="" placeholder="" />
-                            <label for="loginEmail">Username or Email</label>
+                            <input type="text" id="usnEmail" name="usnEmail" class="form-control" value="" placeholder="" />
+                            <label for="usnEmail">Username or Email</label>
                         </div>
-                        <div class="input-group-text"><span class="bi bi-envelope"></span></div>
                     </div>
                     <div class="input-group mb-3">
-                        <div class="form-floating">
-                            <input id="loginPassword" type="password" class="form-control" placeholder="" />
-                            <label for="loginPassword">Password</label>
-                        </div>
                         <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+                        <div class="form-floating">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="" />
+                            <label for="password">Password</label>
+                        </div>
                     </div>
                     <!--begin::Row-->
                     <div class="row">
@@ -84,7 +84,7 @@
                 </form>
 
                 <p class="mt-3">
-                    Dont have an account?
+                    Don't have an account?
                     <a href="register.html" class="text-center">Register</a>
                 </p>
             </div>
@@ -93,6 +93,8 @@
     </div>
     <!-- /.login-box -->
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script
         src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
         integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
@@ -108,7 +110,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="../../../dist/js/adminlte.js"></script>
+    <script src="dist/js/adminlte.js"></script>
     <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
@@ -131,6 +133,8 @@
         });
     </script>
     <!--end::OverlayScrollbars Configure-->
+    <!-- custom js -->
+    <script src="js/auth.js"></script>
     <!--end::Script-->
 </body>
 <!--end::Body-->

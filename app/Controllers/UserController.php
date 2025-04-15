@@ -22,6 +22,10 @@ class UserController extends BaseController
     {
         $data = $this->request->getPost();
 
+        if (!$this->validate($this->userModel->validationRulesCreate)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Duplicated data']);
+        }
+
         $password_hash = password_hash($data['password'], PASSWORD_DEFAULT);
 
         $data['password'] = $password_hash;
@@ -56,8 +60,6 @@ class UserController extends BaseController
     public function saveEdit($user_id = 0)
     {
         $formData = $this->request->getPost();
-
-        // $data = $this->userModel->find($user_id); //
 
         // $rules = [
         //     "username" => "is_unique[users.username,user_id,{$user_id}]",

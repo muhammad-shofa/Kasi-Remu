@@ -75,8 +75,8 @@ $(document).ready(function () {
             $("#username").val(""),
             $("#password").val(""),
             $("#email").val(""),
-            $("#gender").val(""),
-            $("#role").val(""),
+            $("#gender").val("M"),
+            $("#role").val("admin"),
             $("#addModal").modal("hide");
         }
       },

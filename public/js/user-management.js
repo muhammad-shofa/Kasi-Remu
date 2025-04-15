@@ -165,7 +165,7 @@ $(document).ready(function () {
     let user_id = $("#deleteUserId").val();
 
     // console.log(user_id + "dari delete action");
-
+    
     $.ajax({
       url: "/api/user/delete-user/" + user_id,
       type: "DELETE",

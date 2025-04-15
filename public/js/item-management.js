@@ -47,4 +47,34 @@ $(document).ready(function () {
 
   // load user data
   loadItemData();
+
+  // delete user confirmation
+  $(document).on("click", ".delete-action", function () {
+    let item_id = $(this).data("item_id");
+    $("#deleteItemId").val(item_id);
+  });
+
+  // confirmed deletion
+  $(document).on("click", ".confirmed-deletion", function () {
+    let item_id = $("#deleteItemId").val();
+
+    $.ajax({
+      url: "/api/item/delete-item/" + item_id,
+      type: "DELETE",
+      dataType: "json",
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          loadItemData();
+
+          $("#deleteModal").modal("hide");
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
 });

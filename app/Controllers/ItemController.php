@@ -22,4 +22,11 @@ class ItemController extends BaseController
 
         return $this->response->setJSON(['success' => true, 'data' => $data]);
     }
+
+    public function deleteItem($item_id = 0)
+    {
+        $this->itemModel->delete($item_id);
+
+        return $this->response->setJSON(['success' => true, 'message' => 'Item deleted successfully']);
+    }
 }

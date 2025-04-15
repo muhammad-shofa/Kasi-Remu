@@ -69,7 +69,7 @@
                     <label for="stock" class="form-label">Stock</label>
                     <input type="number" class="form-control" id="stock" />
                 </div>
-           
+
                 <!-- <div class="md-3">
                     <label for="role" class="form-label">Role</label>
                     <select class="form-select" id="role">
@@ -94,6 +94,25 @@
                 'modalFooter' => $modalFooterAdd
             ]) ?>
 
+            <!-- delete modal -->
+            <!-- masukkan modal body -->
+            <?php ob_start() ?>
+            <input type="hidden" id="deleteItemId">
+            <p>Are you sure you want to delete this item?</p>
+            <?php $modalBodyDelete = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="confirmed-deletion btn btn-danger">Yes</button>
+            <?php $modalFooterDelete = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalId' => 'deleteModal',
+                'modalTitle' => 'Delete Item',
+                'modalBody' => $modalBodyDelete,
+                'modalFooter' => $modalFooterDelete
+            ]) ?>
 
         </div>
         <!--end::Container-->

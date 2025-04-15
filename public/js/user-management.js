@@ -78,6 +78,8 @@ $(document).ready(function () {
             $("#gender").val("M"),
             $("#role").val("admin"),
             $("#addModal").modal("hide");
+        } else {
+          console.log(response.message);
         }
       },
       error: (xhr, error, status) => {

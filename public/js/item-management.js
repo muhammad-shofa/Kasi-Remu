@@ -18,7 +18,7 @@ $(document).ready(function () {
                     <tr class="align-middle">
                         <td>${no}</td>
                         <td>${item["name"]}</td>
-                        <td>${item["category"]}</td>
+                        <td>${item["category_name"]}</td>
                         <td>${item["price"]}</td>
                         <td>${item["stock"]}</td>
                         <td>

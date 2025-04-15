@@ -13,8 +13,8 @@ class ItemModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'category_id',
         'name',
-        'category',
         'price',
         'stock'
     ];
@@ -48,4 +48,10 @@ class ItemModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Get all data item with category data
+    public function getItemsWithCategory()
+    {
+        return $this->select("items.*, category.category_name")->join("category", "category.category_id = items.category_id")->findAll();
+    }
 }

@@ -9,7 +9,6 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class UserController extends BaseController
 {
-
     protected $userModel;
 
     public function __construct()
@@ -23,7 +22,7 @@ class UserController extends BaseController
         $data = $this->request->getPost();
 
         if (!$this->validate($this->userModel->validationRulesCreate)) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Duplicated data']);
+            return $this->response->setJSON(['success' => false, 'message' => 'Username Or Email must be unique']);
         }
 
         $password_hash = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -61,13 +60,8 @@ class UserController extends BaseController
     {
         $formData = $this->request->getPost();
 
-        // $rules = [
-        //     "username" => "is_unique[users.username,user_id,{$user_id}]",
-        //     "email" => "is_unique[users.email,user_id,{$user_id}]"
-        // ];
-
-        // if (!$this->validate($rules)) {
-        //     return $this->response->setJSON(['success' => false, 'message' => "Duplicated data"]);
+        // if (!$this->validate($this->userModel->validationRulesUpdate)) {
+        //     return $this->response->setJSON(['success' => false, 'message' => 'Username Or Email must be unique']);
         // }
 
         $updateDataStatus = $this->userModel->update($user_id, $formData);

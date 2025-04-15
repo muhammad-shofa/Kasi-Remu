@@ -44,13 +44,8 @@ class UserModel extends Model
     ];
 
     // update user validation
-    
 
     protected $validationRules = [];
-    // protected $validationRules = [
-    //     'username' => 'is_unique[users.username]',
-    //     'email' => 'is_unique[users.email]'
-    // ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

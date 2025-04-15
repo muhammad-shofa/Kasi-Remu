@@ -17,7 +17,8 @@ class ItemController extends BaseController
 
     public function getItems()
     {
-        $data = $this->itemModel->findAll();
+        // ambil data dari function di itemModel
+        $data = $this->itemModel->getItemsWithCategory();
 
         return $this->response->setJSON(['success' => true, 'data' => $data]);
     }

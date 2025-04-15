@@ -49,6 +49,52 @@
                 <!-- /.card-body -->
             </div>
 
+            <!-- tambah item modal -->
+            <!-- masukkan modal body -->
+            <?php ob_start() ?>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" />
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="category" />
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="price" />
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="number" class="form-control" id="stock" />
+                </div>
+           
+                <!-- <div class="md-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select class="form-select" id="role">
+                        <option selected value="admin">Admin</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="manager">Manager</option>
+                    </select>
+                </div> -->
+            </form>
+            <?php $modalBodyAdd = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="save-add btn btn-primary">Save Item</button>
+            <?php $modalFooterAdd = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalId' => 'addModal',
+                'modalTitle' => 'Add Item',
+                'modalBody' => $modalBodyAdd,
+                'modalFooter' => $modalFooterAdd
+            ]) ?>
+
+
         </div>
         <!--end::Container-->
     </div>

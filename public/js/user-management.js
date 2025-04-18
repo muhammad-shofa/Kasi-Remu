@@ -71,13 +71,8 @@ $(document).ready(function () {
           loadUserData();
 
           // reset
-          $("#name").val(""),
-            $("#username").val(""),
-            $("#password").val(""),
-            $("#email").val(""),
-            $("#gender").val("M"),
-            $("#role").val("admin"),
-            $("#addModal").modal("hide");
+          $("#addUserForm")[0].reset();
+          $("#addModal").modal("hide");
         } else {
           console.log(response.message);
         }
@@ -165,7 +160,7 @@ $(document).ready(function () {
     let user_id = $("#deleteUserId").val();
 
     // console.log(user_id + "dari delete action");
-    
+
     $.ajax({
       url: "/api/user/delete-user/" + user_id,
       type: "DELETE",

@@ -48,6 +48,39 @@ $(document).ready(function () {
   // load item data
   loadItemData();
 
+  // add new item
+  $(document).on("click", ".save-add", function () {
+    let formData = {
+      name: $("#name").val(),
+      category_id: $("#category").val(),
+      price: $("#price").val(),
+      stock: $("#stock").val(),
+    };
+
+    $.ajax({
+      url: "/api/item/add-item",
+      type: "POST",
+      dataType: "json",
+      data: formData,
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          loadItemData();
+
+          // reset
+          $("#addItemForm")[0].reset();
+          $("#addModal").modal("hide");
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
 
   // delete user confirmation
   $(document).on("click", ".delete-action", function () {

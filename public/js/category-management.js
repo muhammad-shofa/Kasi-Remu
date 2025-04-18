@@ -27,10 +27,10 @@ $(document).ready(function () {
   }
 
   // load user data
-  console.log(loadCategoryData());
-  // loadCategoryData();
+  // console.log(loadCategoryData());
+  loadCategoryData();
 
-  
+
 
   // delete user confirmation
   // $(document).on("click", ".delete-action", function () {

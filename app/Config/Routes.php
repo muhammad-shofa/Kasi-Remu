@@ -24,6 +24,7 @@ $routes->delete('/api/user/delete-user/(:num)', 'UserController::deleteUser/$1')
 
 // item endpoint
 $routes->get('/api/item/get-items', 'ItemController::getItems');
+$routes->post('/api/item/add-item', 'ItemController::addItem');
 $routes->delete('/api/item/delete-item/(:num)', 'ItemController::deleteItem/$1');
 
 // category endpoint

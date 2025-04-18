@@ -52,6 +52,6 @@ class ItemModel extends Model
     // Get all data item with category data
     public function getItemsWithCategory()
     {
-        return $this->select("items.*, category.category_name")->join("category", "category.category_id = items.category_id")->findAll();
+        return $this->select("items.*, categories.category_name")->join("categories", "categories.category_id = items.category_id")->findAll();
     }
 }

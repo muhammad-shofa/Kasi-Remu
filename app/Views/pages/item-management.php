@@ -57,10 +57,19 @@
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" />
                 </div>
-                <div class="mb-3">
-                    <label for="category" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="category" />
-                </div>
+                <label for="category">Category</label>
+                <select name="category" id="category" class="form-control">
+                    <option value="">-- Pilih Kategori --</option>
+                    <!-- <div id="option-category-data">
+
+                    </div> -->
+
+                </select>
+                <small>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddCategory">
+                        + Tambah Kategori Baru
+                    </a>
+                </small>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
                     <input type="number" class="form-control" id="price" />
@@ -69,15 +78,6 @@
                     <label for="stock" class="form-label">Stock</label>
                     <input type="number" class="form-control" id="stock" />
                 </div>
-
-                <!-- <div class="md-3">
-                    <label for="role" class="form-label">Role</label>
-                    <select class="form-select" id="role">
-                        <option selected value="admin">Admin</option>
-                        <option value="cashier">Cashier</option>
-                        <option value="manager">Manager</option>
-                    </select>
-                </div> -->
             </form>
             <?php $modalBodyAdd = ob_get_clean() ?>
 
@@ -123,4 +123,5 @@
 
 <?= $this->section("script") ?>
 <script src="js/item-management.js"></script>
+<script src="js/category-management.js"></script>
 <?= $this->endSection() ?>

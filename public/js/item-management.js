@@ -45,8 +45,9 @@ $(document).ready(function () {
     });
   }
 
-  // load user data
+  // load item data
   loadItemData();
+
 
   // delete user confirmation
   $(document).on("click", ".delete-action", function () {

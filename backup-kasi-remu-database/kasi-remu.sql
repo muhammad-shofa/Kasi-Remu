@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 15, 2025 at 03:24 PM
+-- Generation Time: Apr 19, 2025 at 03:37 PM
 -- Server version: 8.0.41-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -24,21 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Table structure for table `categories`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE `categories` (
   `category_id` int NOT NULL,
-  `name` varchar(150) NOT NULL,
+  `category_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `categories`
 --
 
-INSERT INTO `category` (`category_id`, `name`, `created_at`, `updated_at`) VALUES
+INSERT INTO `categories` (`category_id`, `category_name`, `created_at`, `updated_at`) VALUES
 (1, 'School and Office', '2025-04-15 22:21:07', '2025-04-15 22:21:07'),
 (2, 'Fruits', '2025-04-15 22:21:07', '2025-04-15 22:21:07');
 
@@ -63,10 +63,11 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `category_id`, `name`, `price`, `stock`, `created_at`, `updated_at`) VALUES
-(9, 1, 'Pen', 5000, 325, '2025-04-15 22:24:12', '2025-04-15 22:24:12'),
 (10, 1, 'Notebook', 7000, 465, '2025-04-15 22:24:12', '2025-04-15 22:24:12'),
-(11, 2, 'Apple', 4000, 145, '2025-04-15 22:24:12', '2025-04-15 22:24:12'),
-(12, 2, 'Mango', 6000, 132, '2025-04-15 22:24:12', '2025-04-15 22:24:12');
+(13, 1, 'Pen', 5000, 345, '2025-04-15 23:08:35', '2025-04-15 23:08:35'),
+(14, 2, 'Mango', 7000, 524, '2025-04-15 23:08:35', '2025-04-15 23:08:35'),
+(16, 2, 'Apple', 4000, 111, '2025-04-18 13:04:42', '2025-04-18 13:04:42'),
+(17, 2, 'Orange', 3000, 337, '2025-04-18 13:06:00', '2025-04-18 13:06:00');
 
 -- --------------------------------------------------------
 
@@ -129,16 +130,16 @@ INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `email`, `gender
 (13, 'Andreas', 'andreas', '$2y$10$7.NgVVSO/i05PlyU3hSzruTF1hoIv.s2cM20nsiTArZoqLE4EkiJW', 'andreas@gmail.com', 'M', 'cashier', '2025-04-13 05:45:28', '2025-04-13 05:45:28'),
 (14, 'test 2', 'test', '$2y$10$IGW0UY6DVMHLjtW0GLKz6u2eRLn9JgCD57jxwFVwJaNdsBatYyy6S', 'test@gmail.com', 'W', 'manager', '2025-04-14 12:02:10', '2025-04-15 08:33:38'),
 (15, 'anjay', 'anjay', '$2y$10$4Nq3ekggN5EVIe2C4ez8Ru7OJJnZ6PwQ5MZ3n64SuF5aTwU5EAEVW', 'anjay@gmail.com', 'M', 'cashier', '2025-04-15 08:33:58', '2025-04-15 08:33:58'),
-(17, 'anjay mabar', 'anjay mabar', '$2y$10$BkhkAnnKGbWN94bowjjxX.S5ZestQl9RrjgsgOkiW1i8uGNixf0yO', 'anjaymabar@gmail.com', 'M', 'cashier', '2025-04-15 14:52:29', '2025-04-15 14:52:29');
+(18, 'anjay mabar', 'anjaymabar', '$2y$10$aEOmUszYGBOZhNo7ebpw/eoytyOtdQ1dcdzEoJwjWLTgkG1WJ5lo6', 'anjaymabar@gmail.com', 'W', 'manager', '2025-04-18 12:39:10', '2025-04-18 12:39:10');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `category`
+-- Indexes for table `categories`
 --
-ALTER TABLE `category`
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
@@ -176,16 +177,16 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT for table `categories`
 --
-ALTER TABLE `category`
+ALTER TABLE `categories`
   MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -203,7 +204,7 @@ ALTER TABLE `transaction_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
@@ -213,7 +214,7 @@ ALTER TABLE `users`
 -- Constraints for table `items`
 --
 ALTER TABLE `items`
-  ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transactions`

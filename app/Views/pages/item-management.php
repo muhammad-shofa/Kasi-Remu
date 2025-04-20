@@ -23,6 +23,8 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <h3 class="card-title">Item Table</h3>
+                <div id="category-demo"></div>
+
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
@@ -58,16 +60,13 @@
                     <input type="text" class="form-control" id="name" />
                 </div>
                 <label for="category">Category</label>
+                <input type="text" id="search-category" class="form-control mb-2" placeholder="Search category...">
                 <select name="category" id="category" class="form-control">
-                    <option value="">-- Pilih Kategori --</option>
-                    <!-- <div id="option-category-data">
-
-                    </div> -->
-
+                    
                 </select>
                 <small>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddCategory">
-                        + Tambah Kategori Baru
+                    <a href="#0" class="text-dark" data-bs-toggle="modal" data-bs-target="#modalAddCategory">
+                        + Add new category
                     </a>
                 </small>
                 <div class="mb-3">

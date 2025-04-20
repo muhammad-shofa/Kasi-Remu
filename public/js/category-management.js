@@ -7,8 +7,8 @@ $(document).ready(function () {
       dataType: "json",
       success: (response) => {
         if (response.success) {
-          let option = "";
-
+          let option =
+            "<option value='' selected>-- Select Category --</option>";
           response.data.forEach((category) => {
             option += `
               <option value="${category["category_id"]}">${category["category_name"]}</option>
@@ -27,10 +27,30 @@ $(document).ready(function () {
   }
 
   // load user data
-  // console.log(loadCategoryData());
   loadCategoryData();
 
+  // live search category
+  // Trigger setiap kali user mengetik
+  $("#search-category").on("input", function () {
+    let keyword = $(this).val();
 
+    $.ajax({
+      url: "/api/category/search",
+      type: "GET",
+      data: { keyword: keyword },
+      dataType: "json",
+      success: (response) => {
+        if (response.status) {
+          let resultSearch = ``;
+          response.data.forEach((category) => {
+            resultSearch += `<p>${category["category_name"]}</p>`;
+          });
+          $("#category-demo").html(resultSearch);
+          console.log(resultSearch);
+        }
+      },
+    });
+  });
 
   // delete user confirmation
   // $(document).on("click", ".delete-action", function () {

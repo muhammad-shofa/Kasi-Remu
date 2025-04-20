@@ -24,4 +24,16 @@ class CategoryController extends BaseController
             'data' => $dataCategories
         ]);
     }
+
+    public function search()
+    {
+        $keyword = $this->request->getGet('keyword');
+
+        $data = $this->categoryModel->like('category_name', $keyword)->findAll();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $data
+        ]);
+    }
 }

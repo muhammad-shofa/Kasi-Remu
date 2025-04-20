@@ -29,3 +29,5 @@ $routes->delete('/api/item/delete-item/(:num)', 'ItemController::deleteItem/$1')
 
 // category endpoint
 $routes->get('/api/category/get-categories', 'CategoryController::getCategories');
+$routes->get('/api/category/search', 'CategoryController::search');
+

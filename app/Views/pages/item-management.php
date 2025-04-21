@@ -23,7 +23,6 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <h3 class="card-title">Item Table</h3>
-                <div id="category-demo"></div>
 
                 </div>
                 <!-- /.card-header -->
@@ -60,9 +59,11 @@
                     <input type="text" class="form-control" id="name" />
                 </div>
                 <label for="category">Category</label>
-                <input type="text" id="search-category" class="form-control mb-2" placeholder="Search category...">
+                <!-- <input type="text" id="search-category" class="form-control mb-2" placeholder="Search category..."> -->
+                <!-- <div id="category-demo"></div> -->
+
                 <select name="category" id="category" class="form-control">
-                    
+                    <!-- <option value="">-- Select Category --</option> -->
                 </select>
                 <small>
                     <a href="#0" class="text-dark" data-bs-toggle="modal" data-bs-target="#modalAddCategory">

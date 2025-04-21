@@ -29,6 +29,33 @@ $(document).ready(function () {
   // load user data
   loadCategoryData();
 
+  // live search with select2 library
+  // $("#category").select2({
+  //   placeholder: "Pilih Kategori",
+  //   allowClear: true,
+  //   ajax: {
+  //     url: "/api/category/search",
+  //     dataType: "json",
+  //     delay: 250,
+  //     data: function (params) {
+  //       return {
+  //         keyword: params.term, // keyword yg diketik user
+  //       };
+  //     },
+  //     processResults: function (data) {
+  //       return {
+  //         results: data.data.map(function (category) {
+  //           return {
+  //             id: category.category_id,
+  //             text: category.category_name,
+  //           };
+  //         }),
+  //       };
+  //     },
+  //     cache: true,
+  //   },
+  // });
+
   // live search category
   // Trigger setiap kali user mengetik
   $("#search-category").on("input", function () {

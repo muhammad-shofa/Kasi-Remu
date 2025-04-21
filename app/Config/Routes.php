@@ -15,6 +15,9 @@ $routes->get('/login', 'PagesController::login');
 // auth endpoint
 $routes->post('/api/auth/login', 'UserController::login');
 
+// main dashboard endpoint
+$routes->get("/api/dashboard/count-data", "DashboardController::countData");
+
 // user endpoint
 $routes->get("/api/user/get-users", "UserController::getUsers");
 $routes->post("/api/user/add-user", "UserController::addUser");
@@ -30,4 +33,3 @@ $routes->delete('/api/item/delete-item/(:num)', 'ItemController::deleteItem/$1')
 // category endpoint
 $routes->get('/api/category/get-categories', 'CategoryController::getCategories');
 $routes->get('/api/category/search', 'CategoryController::search');
-

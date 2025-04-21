@@ -30,8 +30,8 @@
                             </span>
                             <div class="info-box-content">
                                 <span class="info-box-text">User</span>
-                                <span class="info-box-number">
-                                    10 (dummy)
+                                <span class="info-box-number" id="userCountData">
+                                    0
                                 </span>
                             </div>
                             <!-- /.info-box-content -->
@@ -48,7 +48,7 @@
                             </span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Item</span>
-                                <span class="info-box-number">300 (dummy)</span>
+                                <span class="info-box-number" id="itemCountData">0</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -95,4 +95,8 @@
         <!--end::Container-->
     </div>
 </main>
+<?= $this->endSection() ?>
+
+<?= $this->section("script") ?>
+<script src="js/dashboard.js"></script>
 <?= $this->endSection() ?>

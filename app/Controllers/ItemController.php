@@ -35,6 +35,13 @@ class ItemController extends BaseController
         ]);
     }
 
+    public function getEdit($item_id = 0)
+    {
+        $data = $this->itemModel->find($item_id);
+
+        return $this->response->setJSON(['success' => true, 'data' => $data]);
+    }
+
     public function deleteItem($item_id = 0)
     {
         $this->itemModel->delete($item_id);

@@ -63,7 +63,6 @@
                 <!-- <div id="category-demo"></div> -->
 
                 <select name="category" id="category" class="form-control">
-                    <!-- <option value="">-- Select Category --</option> -->
                 </select>
                 <small>
                     <a href="#0" class="text-dark" data-bs-toggle="modal" data-bs-target="#modalAddCategory">
@@ -92,6 +91,44 @@
                 'modalTitle' => 'Add Item',
                 'modalBody' => $modalBodyAdd,
                 'modalFooter' => $modalFooterAdd
+            ]) ?>
+
+            <!-- edit modal -->
+            <!-- masukkan modal body -->
+            <?php ob_start() ?>
+            <form>
+                <input type="hidden" id="editItemId">
+                <div class="mb-3">
+                    <label for="editName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="editName" />
+                </div>
+                <div class="mb-3">
+                    <label for="editCategory" class="form-label">Category</label>
+                    <select id="editCategory" class="form-control">
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="editPrice" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="editPrice" />
+                </div>
+                <div class="mb-3">
+                    <label for="editStock" class="form-label">Stock</label>
+                    <input type="number" class="form-control" id="editStock" />
+                </div>
+            </form>
+            <?php $modalBodyEdit = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="save-edit btn btn-warning">Save Changes</button>
+            <?php $modalFooterEdit = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalId' => 'editModal',
+                'modalTitle' => 'Edit Item',
+                'modalBody' => $modalBodyEdit,
+                'modalFooter' => $modalFooterEdit
             ]) ?>
 
             <!-- delete modal -->

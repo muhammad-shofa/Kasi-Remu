@@ -7,11 +7,9 @@ $(document).ready(function () {
       dataType: "json",
       success: (response) => {
         if (response.success) {
-          // console.log(response.data);
           let row = "";
           let no = 0;
 
-          // if (response.data.length != 0) {
           response.data.forEach((item) => {
             no++;
             row += `
@@ -30,9 +28,6 @@ $(document).ready(function () {
                     </tr>
                     `;
           });
-          // } else {
-          //   $(".no-data-yet").html("<p>No users yet</p>");
-          // }
 
           $("#itemTableData").html(row);
         }
@@ -70,6 +65,75 @@ $(document).ready(function () {
           // reset
           $("#addItemForm")[0].reset();
           $("#addModal").modal("hide");
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
+
+  //
+
+  // get edit (when edit-action btn clicked)
+  $(document).on("click", ".edit-action", function () {
+    let item_id = $(this).data("item_id");
+    let category_id = 0;
+
+    $.ajax({
+      url: "/api/item/get-edit/" + item_id,
+      type: "GET",
+      dataType: "json",
+      success: (response) => {
+        if (response.success) {
+          console.log(response.data);
+          $("#editItemId").val(response.data.item_id); // hidden
+          $("#editName").val(response.data.name);
+          // category_id += response.data.category
+          // loadCategoryData();
+
+          $("#editCategory").val(response.data.category_name);
+          $("#editPrice").val(response.data.price);
+          $("#editStock").val(response.data.stock);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
+
+  // save edit
+  $(document).on("click", ".save-edit", function () {
+    let item_id = $("#editItemId").val();
+
+    let formData = {
+      name: $("#editName").val(),
+      username: $("#editUsername").val(),
+      email: $("#editEmail").val(),
+      gender: $("#editGender").val(),
+      role: $("#editRole").val(),
+    };
+
+    console.log(formData);
+
+    $.ajax({
+      url: "/api/item/save-edit/" + item_id,
+      type: "POST",
+      dataType: "json",
+      data: formData,
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          loadUserData();
+
+          $("#editModal").modal("hide");
         } else {
           console.log(response.message);
         }

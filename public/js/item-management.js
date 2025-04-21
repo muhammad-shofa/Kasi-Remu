@@ -77,7 +77,29 @@ $(document).ready(function () {
     });
   });
 
-  //
+  // add new category
+  $(document).on("click", ".save-category", function () {
+    let newCategoryName = $("#newCategoryName").val();
+
+    $.ajax({
+      url: "/api/category/add-category",
+      type: "POST",
+      dataType: "json",
+      data: { name: newCategoryName},
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
 
   // get edit (when edit-action btn clicked)
   $(document).on("click", ".edit-action", function () {

@@ -36,4 +36,25 @@ class CategoryController extends BaseController
             'data' => $data
         ]);
     }
+
+    public function addCategory()
+    {
+        $newCategoryName = $this->request->getPost('name');
+
+        $data = [
+            'category_name' => $newCategoryName
+        ];
+
+        if ($this->categoryModel->save($data)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Successfully add new categroy'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to add new categroy'
+            ]);
+        }
+    }
 }

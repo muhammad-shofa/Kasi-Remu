@@ -93,6 +93,30 @@
                 'modalFooter' => $modalFooterAdd
             ]) ?>
 
+            <!-- add category modal -->
+            <?php ob_start() ?>
+            <form id="addCategoryForm">
+                <div class="mb-3">
+                    <label for="newCategoryName" class="form-label">Category name</label>
+                    <input type="text" class="form-control" id="newCategoryName" />
+                </div>
+            </form>
+            <?php $modalBodyCategoryAdd = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="save-category btn btn-primary">Save Category</button>
+            <?php $modalFooterCategoryAdd = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalId' => 'modalAddCategory',
+                'modalTitle' => 'Add Category',
+                'modalBody' => $modalBodyCategoryAdd,
+                'modalFooter' => $modalFooterCategoryAdd
+            ]) ?>
+
+
             <!-- edit modal -->
             <!-- masukkan modal body -->
             <?php ob_start() ?>

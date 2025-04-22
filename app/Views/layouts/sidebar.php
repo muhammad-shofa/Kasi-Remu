@@ -52,7 +52,7 @@
 
                 <!-- create transaction -->
                 <li class="nav-item">
-                    <a href="#0" class="nav-link">
+                    <a href="/create-transaction" class="nav-link">
                         <i class="nav-icon bi bi-receipt"></i>
                         <p>Create Transaction</p>
                     </a>

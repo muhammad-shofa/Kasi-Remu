@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 19, 2025 at 03:37 PM
+-- Generation Time: Apr 22, 2025 at 01:11 PM
 -- Server version: 8.0.41-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -40,7 +40,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`category_id`, `category_name`, `created_at`, `updated_at`) VALUES
 (1, 'School and Office', '2025-04-15 22:21:07', '2025-04-15 22:21:07'),
-(2, 'Fruits', '2025-04-15 22:21:07', '2025-04-15 22:21:07');
+(2, 'Fruits', '2025-04-15 22:21:07', '2025-04-15 22:21:07'),
+(3, 'Anjay', '2025-04-21 13:58:40', '2025-04-21 13:58:40');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,21 @@ INSERT INTO `items` (`item_id`, `category_id`, `name`, `price`, `stock`, `create
 (13, 1, 'Pen', 5000, 345, '2025-04-15 23:08:35', '2025-04-15 23:08:35'),
 (14, 2, 'Mango', 7000, 524, '2025-04-15 23:08:35', '2025-04-15 23:08:35'),
 (16, 2, 'Apple', 4000, 111, '2025-04-18 13:04:42', '2025-04-18 13:04:42'),
-(17, 2, 'Orange', 3000, 337, '2025-04-18 13:06:00', '2025-04-18 13:06:00');
+(18, 2, 'Orange', 4000, 444, '2025-04-20 11:57:13', '2025-04-20 11:57:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tmp_transactions`
+--
+
+CREATE TABLE `tmp_transactions` (
+  `tmp_txn_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `item_id` int NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -150,6 +165,14 @@ ALTER TABLE `items`
   ADD KEY `fk_category_id` (`category_id`);
 
 --
+-- Indexes for table `tmp_transactions`
+--
+ALTER TABLE `tmp_transactions`
+  ADD PRIMARY KEY (`tmp_txn_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `item_id` (`item_id`);
+
+--
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
@@ -180,13 +203,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `tmp_transactions`
+--
+ALTER TABLE `tmp_transactions`
+  MODIFY `tmp_txn_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -215,6 +244,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `items`
   ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tmp_transactions`
+--
+ALTER TABLE `tmp_transactions`
+  ADD CONSTRAINT `tmp_transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tmp_transactions_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `transactions`

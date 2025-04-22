@@ -10,6 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'PagesController::dashboard');
 $routes->get('/user-management', 'PagesController::userManagement');
 $routes->get('/item-management', 'PagesController::itemManagement');
+$routes->get('/create-transaction', 'PagesController::createTransaction');
 $routes->get('/login', 'PagesController::login');
 
 // auth endpoint

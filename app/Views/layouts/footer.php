@@ -4,9 +4,8 @@
     <!--end::To the end-->
     <!--begin::Copyright-->
     <strong>
-        Copyright &copy; 2014-2024&nbsp;
-        <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+        Create with ♥️ by
+        <a href="https://github.com/muhammad-shofa" class="text-decoration-none">mshofadev</a> - 2025.
     </strong>
-    All rights reserved.
     <!--end::Copyright-->
 </footer>

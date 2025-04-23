@@ -89,6 +89,14 @@ class UserController extends BaseController
         $user =  $this->userModel->where("username", $loginUsnEmail)->orWhere("email", $loginUsnEmail)->first();
 
         if ($user && password_verify($loginPassword, $user['password'])) {
+
+            session()->set([
+                'is_login' => true,
+                'user_id' => $user['user_id'],
+                'name' => $user['name'],
+                'role' => $user['role'],
+            ]);
+
             return $this->response->setJSON(['success' => true, 'message' => 'Login Successfull']);
         } else {
             return $this->response->setJSON(['success' => false, 'message' => 'Login Failed']);

@@ -85,7 +85,7 @@ $(document).ready(function () {
       url: "/api/category/add-category",
       type: "POST",
       dataType: "json",
-      data: { name: newCategoryName},
+      data: { name: newCategoryName },
       success: (response) => {
         if (response.success) {
           console.log(response.message);

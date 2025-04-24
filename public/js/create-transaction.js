@@ -7,19 +7,18 @@ $(document).ready(function () {
       success: (response) => {
         if (response.success) {
           let content = "";
-          let no = 0;
 
-          response.data.forEach((item) => {
-            no++;
+          console.log("debuug load catalog data" + response.data[1]["price"]);
+          for (let i = 0; i <= 4; i++) {
             content += `
-                    <div class="flex-grow-1 border p-3 m-3 shadow-sm" style="width: 200px;">
-                            <h5 class="mb-1">${item["name"]}</h5>
-                            <p class="mb-2">Rp${item["price"]}</p>
-                            <div class="d-grid">
-                                <button class="catalog-add-item btn btn-warning" data-item_id="${item["item_id"]}">+</button>
-                            </div>
-                    </div>`;
-          });
+                      <div class="flex-grow-1 border p-3 m-3 shadow-sm" style="width: 200px;">
+                              <h5 class="mb-1">${response.data[i]["name"]}</h5>
+                              <p class="mb-2">Rp${response.data[i]["price"]}</p>
+                              <div class="d-grid">
+                                  <button class="catalog-add-item btn btn-warning" data-item_id="${response.data[i]["item_id"]}">+</button>
+                              </div>
+                      </div>`;
+          }
 
           $("#catalog-item").html(content);
         }
@@ -50,16 +49,8 @@ $(document).ready(function () {
       success: (response) => {
         if (response.success) {
           console.log(response.message);
-          console.log(response.saved_data);
-
-          // debug
-          // console.log(response.item_id);
-          // console.log(response.user_id);
         } else {
           console.log(response.message);
-          console.log(response.error);
-          // console.log(response.item_id);
-          // console.log(response.user_id);
         }
       },
       error: (xhr, error, status) => {

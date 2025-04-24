@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 22, 2025 at 01:11 PM
+-- Generation Time: Apr 24, 2025 at 01:57 PM
 -- Server version: 8.0.41-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -80,9 +80,17 @@ CREATE TABLE `tmp_transactions` (
   `tmp_txn_id` int NOT NULL,
   `user_id` int NOT NULL,
   `item_id` int NOT NULL,
-  `quantity` int NOT NULL DEFAULT '1',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `quantity` int NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tmp_transactions`
+--
+
+INSERT INTO `tmp_transactions` (`tmp_txn_id`, `user_id`, `item_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(1, 11, 10, 1, '2025-04-24 13:44:10', '2025-04-24 13:44:10');
 
 -- --------------------------------------------------------
 
@@ -169,8 +177,8 @@ ALTER TABLE `items`
 --
 ALTER TABLE `tmp_transactions`
   ADD PRIMARY KEY (`tmp_txn_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `item_id` (`item_id`);
+  ADD KEY `tmp_transactions_ibfk_1` (`user_id`),
+  ADD KEY `tmp_transactions_ibfk_2` (`item_id`);
 
 --
 -- Indexes for table `transactions`
@@ -215,7 +223,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `tmp_transactions`
 --
 ALTER TABLE `tmp_transactions`
-  MODIFY `tmp_txn_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `tmp_txn_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -249,8 +257,8 @@ ALTER TABLE `items`
 -- Constraints for table `tmp_transactions`
 --
 ALTER TABLE `tmp_transactions`
-  ADD CONSTRAINT `tmp_transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tmp_transactions_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `tmp_transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tmp_transactions_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transactions`

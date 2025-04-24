@@ -36,3 +36,6 @@ $routes->delete('/api/item/delete-item/(:num)', 'ItemController::deleteItem/$1')
 $routes->get('/api/category/get-categories', 'CategoryController::getCategories');
 $routes->post('/api/category/add-category', 'CategoryController::addCategory');
 $routes->get('/api/category/search', 'CategoryController::search');
+
+// transaction endpoint
+$routes->post('/api/transaction/add-catalog-item', 'TransactionController::addCatalogItem');

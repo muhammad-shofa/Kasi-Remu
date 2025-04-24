@@ -13,7 +13,7 @@ $(document).ready(() => {
         if (response.success) {
           console.log(response.message);
           // future update: show popup login success 
-          
+          // console.log();
           window.location.href = "/";
         } else {
           console.log(response.message);

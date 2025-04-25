@@ -42,8 +42,7 @@ $(document).ready(function () {
       dataType: "json",
       success: (response) => {
         if (response.success) {
-          console.log(response.message);
-          console.log(response.data);
+          // console.log(response.message);
 
           let no = 0;
           let row = "";
@@ -66,6 +65,13 @@ $(document).ready(function () {
                   </td>
                   <td class="text-center border">
                     ${tmp_txn["price"] * tmp_txn["quantity"]}
+                  </td>
+                  <td>
+                      <button type="button" class="delete-item-cart btn btn-danger" data-tmp_txn_id="${
+                        tmp_txn["tmp_txn_id"]
+                      }">
+                        <i class="nav-icon bi bi-trash"></i>
+                      </button>
                   </td>
               </tr>`;
 
@@ -117,6 +123,32 @@ $(document).ready(function () {
     });
   });
 
+  // delete item cart
+  $(document).on("click", ".delete-item-cart", function () {
+    let tmp_txn_id = $(this).data("tmp_txn_id");
+    console.log(tmp_txn_id);
+
+    $.ajax({
+      url: "/api/transaction/delete-item-cart/" + tmp_txn_id,
+      type: "DELETE",
+      dataType: "json",
+      success: (response) => {
+        if (response.success) {
+          loadCartData();
+          console.log(response.message);
+          // loadCartData(true);
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
+
   // confirmed reset delete all data
   $(document).on("click", ".btn-reset-confirmed", function () {
     $.ajax({
@@ -125,11 +157,9 @@ $(document).ready(function () {
       dataType: "json",
       success: (response) => {
         if (response.success) {
-          console.log(response.message);
           loadCartData(true);
           $("#resetCartModal").modal("hide");
         } else {
-          console.log(response.message);
           $("#resetCartModal").modal("hide");
         }
       },

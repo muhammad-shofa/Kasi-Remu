@@ -33,7 +33,9 @@ $(document).ready(function () {
   }
 
   // load cart data
-  function loadCartData() {
+  function loadCartData(isReset) {
+    isReset ? $("#cartTableData").empty() : "";
+
     $.ajax({
       url: "/api/transaction/get-tmp-transaction",
       type: "GET",
@@ -45,7 +47,6 @@ $(document).ready(function () {
 
           let no = 0;
           let row = "";
-
 
           response.data.forEach((tmp_txn) => {
             no++;
@@ -64,7 +65,7 @@ $(document).ready(function () {
                     ${tmp_txn["quantity"]}
                   </td>
                   <td class="text-center border">
-                    ${tmp_txn['price'] * tmp_txn['quantity']}
+                    ${tmp_txn["price"] * tmp_txn["quantity"]}
                   </td>
               </tr>`;
 
@@ -106,6 +107,30 @@ $(document).ready(function () {
           loadCartData();
         } else {
           console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
+
+  // confirmed reset delete all data
+  $(document).on("click", ".btn-reset-confirmed", function () {
+    $.ajax({
+      url: "/api/transaction/reset-cart",
+      type: "DELETE",
+      dataType: "json",
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          loadCartData(true);
+          $("#resetCartModal").modal("hide");
+        } else {
+          console.log(response.message);
+          $("#resetCartModal").modal("hide");
         }
       },
       error: (xhr, error, status) => {

@@ -56,4 +56,20 @@ class TransactionController extends BaseController
             'message' => 'Transaction data retrieved successfully'
         ]);
     }
+
+    public function resetCart()
+    {
+        $this->tmpTransactionModel->truncate();
+        // $this->tmpTransactionModel->delete();
+
+        /* note:
+        truncate = hapus data beserta reset increment
+        delete = hapus data tidak dengan increment
+        */
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Successfully delete all data'
+        ]);
+    }
 }

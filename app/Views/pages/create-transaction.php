@@ -46,32 +46,38 @@
                                 </tr>
                             </thead>
                             <tbody id="cartTableData">
-                                <!-- <tr>
-                                    <td class="text-center border">
-                                        1
-                                    </td>
-                                    <td class="text-center border">
-                                        Mango
-                                    </td>
-                                    <td class="text-center border">
-                                        8000
-                                    </td>
-                                    <td class="text-center border">
-                                        3
-                                    </td>
-                                    <td class="text-center border">
-                                        24000
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
 
+                        <button class="btn-reset-tmp-txn btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#resetCartModal">
+                            <i class="nav-icon bi bi-trash"></i>
+                        </button>
                         <!-- </div> -->
                     </div>
                 </div>
             </div>
         </div>
         <!--end::Container-->
+
+
+        <!-- delete all tmp txn modal / reset cart-->
+        <!-- masukkan modal body -->
+        <?php ob_start() ?>
+        <p>Are you sure you want to delete all item on this cart?</p>
+        <?php $modalBodyDelete = ob_get_clean() ?>
+
+        <!-- masukkan modal footer -->
+        <?php ob_start() ?>
+        <button type="button" class="btn-reset-confirmed btn btn-danger">Yes</button>
+        <?php $modalFooterDelete = ob_get_clean() ?>
+
+        <!-- kirim ke layouts/modal -->
+        <?= view("layouts/modal", [
+            'modalId' => 'resetCartModal',
+            'modalTitle' => 'Delete Cart Item',
+            'modalBody' => $modalBodyDelete,
+            'modalFooter' => $modalFooterDelete
+        ]) ?>
     </div>
 </main>
 
@@ -79,5 +85,4 @@
 
 <?= $this->section("script") ?>
 <script src="js/create-transaction.js"></script>
-<!-- <script src="js/category-management.js"></script> -->
 <?= $this->endSection() ?>

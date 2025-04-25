@@ -40,3 +40,4 @@ $routes->get('/api/category/search', 'CategoryController::search');
 // transaction endpoint
 $routes->post('/api/transaction/add-catalog-item', 'TransactionController::addCatalogItem');
 $routes->get('/api/transaction/get-tmp-transaction', 'TransactionController::getTmpTransaction');
+$routes->delete('/api/transaction/reset-cart', 'TransactionController::resetCart');

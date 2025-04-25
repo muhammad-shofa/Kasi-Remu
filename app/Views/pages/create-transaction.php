@@ -43,6 +43,7 @@
                                     <th>Prc</th>
                                     <th>Qty</th>
                                     <th>Total</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="cartTableData">
@@ -78,6 +79,8 @@
             'modalBody' => $modalBodyDelete,
             'modalFooter' => $modalFooterDelete
         ]) ?>
+
+
     </div>
 </main>
 

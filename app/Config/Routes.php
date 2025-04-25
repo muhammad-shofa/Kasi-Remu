@@ -41,3 +41,4 @@ $routes->get('/api/category/search', 'CategoryController::search');
 $routes->post('/api/transaction/add-catalog-item', 'TransactionController::addCatalogItem');
 $routes->get('/api/transaction/get-tmp-transaction', 'TransactionController::getTmpTransaction');
 $routes->delete('/api/transaction/reset-cart', 'TransactionController::resetCart');
+$routes->delete('/api/transaction/delete-item-cart/(:num)', 'TransactionController::deleteItemCart/$1');

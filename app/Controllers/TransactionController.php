@@ -48,7 +48,7 @@ class TransactionController extends BaseController
     function getTmpTransaction()
     {
         // $data = $this->tmpTransactionModel->findAll();
-        $data = $this->tmpTransactionModel->select('items.name, items.price, tmp_transactions.quantity')->join('items', 'items.item_id = tmp_transactions.item_id')->orderBy('tmp_txn_id', 'ASC')->findAll();
+        $data = $this->tmpTransactionModel->select('items.name, items.price, tmp_transactions.tmp_txn_id, tmp_transactions.quantity')->join('items', 'items.item_id = tmp_transactions.item_id')->orderBy('tmp_txn_id', 'ASC')->findAll();
 
         return $this->response->setJSON([
             'success' => true,
@@ -70,6 +70,16 @@ class TransactionController extends BaseController
         return $this->response->setJSON([
             'success' => true,
             'message' => 'Successfully delete all data'
+        ]);
+    }
+
+    public function deleteItemCart($tmp_txn_id = 0)
+    {
+        $this->tmpTransactionModel->delete($tmp_txn_id);
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Item deleted successfully'
         ]);
     }
 }

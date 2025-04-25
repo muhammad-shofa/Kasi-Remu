@@ -31,19 +31,6 @@ class TransactionController extends BaseController
             'quantity' => 1
         ];
 
-        // $this->tmpTransactionModel->save($data);
-        // return $this->response->setJSON([
-        //     'success' => true,
-        //     'message' => 'tmp_txn saved',
-        //     'saved_data' => $data
-        // ]);
-
-        // return $this->response->setJSON([
-        //     'success' => false,
-        //     'message' => 'Gagal menyimpan data',
-        //     'errors' => $this->tmpTransactionModel->errors(), // ini akan kasih tahu error CI
-        //     'data' => $data
-        // ]);
         if ($this->tmpTransactionModel->save($data)) {
             return $this->response->setJSON([
                 'success' => true,
@@ -56,11 +43,17 @@ class TransactionController extends BaseController
                 'message' => 'Failed to save data',
             ]);
         }
-        // return $this->response->setJSON([
-        //     'success' => true,
-        //     'message' => 'debug user_id',
-        //     'item_id' => $item_id,
-        //     'user_id' => $user_id
-        // ]);
+    }
+
+    function getTmpTransaction()
+    {
+        // $data = $this->tmpTransactionModel->findAll();
+        $data = $this->tmpTransactionModel->select('items.name, items.price, tmp_transactions.quantity')->join('items', 'items.item_id = tmp_transactions.item_id')->orderBy('tmp_txn_id', 'ASC')->findAll();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $data,
+            'message' => 'Transaction data retrieved successfully'
+        ]);
     }
 }

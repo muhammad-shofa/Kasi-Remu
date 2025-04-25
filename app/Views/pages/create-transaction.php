@@ -33,7 +33,40 @@
                 <div class="col-md-6 mb-3">
                     <div class="cart border p-3 shadow-sm" style="min-height: 400px;">
                         <h4>Cart</h4>
-                        <p>Hello</p>
+
+                        <!-- <div class="d-flex flex-wrap justify-content-around" id="cart-item"> -->
+                        <table class="table border">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">No</th>
+                                    <th>Name</th>
+                                    <th>Prc</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartTableData">
+                                <!-- <tr>
+                                    <td class="text-center border">
+                                        1
+                                    </td>
+                                    <td class="text-center border">
+                                        Mango
+                                    </td>
+                                    <td class="text-center border">
+                                        8000
+                                    </td>
+                                    <td class="text-center border">
+                                        3
+                                    </td>
+                                    <td class="text-center border">
+                                        24000
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>

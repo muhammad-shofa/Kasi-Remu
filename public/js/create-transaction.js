@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // load catalog data
   function loadCatalogData() {
     $.ajax({
       url: "/api/item/get-items",
@@ -8,7 +9,7 @@ $(document).ready(function () {
         if (response.success) {
           let content = "";
 
-          console.log("debuug load catalog data" + response.data[1]["price"]);
+          // console.log("debuug load catalog data" + response.data[1]["price"]);
           for (let i = 0; i <= 4; i++) {
             content += `
                       <div class="flex-grow-1 border p-3 m-3 shadow-sm" style="width: 200px;">
@@ -31,8 +32,61 @@ $(document).ready(function () {
     });
   }
 
+  // load cart data
+  function loadCartData() {
+    $.ajax({
+      url: "/api/transaction/get-tmp-transaction",
+      type: "GET",
+      dataType: "json",
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          console.log(response.data);
+
+          let no = 0;
+          let row = "";
+
+
+          response.data.forEach((tmp_txn) => {
+            no++;
+            row += `
+              <tr>
+                  <td class="text-center border">
+                    ${no}
+                  </td>
+                  <td class="text-center border">
+                    ${tmp_txn["name"]}
+                    </td>
+                  <td class="text-center border">
+                    ${tmp_txn["price"]}
+                    </td>
+                  <td class="text-center border">
+                    ${tmp_txn["quantity"]}
+                  </td>
+                  <td class="text-center border">
+                    ${tmp_txn['price'] * tmp_txn['quantity']}
+                  </td>
+              </tr>`;
+
+            $("#cartTableData").html(row);
+          });
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  }
+
   // load catalog data
   loadCatalogData();
+
+  // load cart data
+  loadCartData();
 
   // ketika tomobl tambah pada item diklik
   $(document).on("click", ".catalog-add-item", function () {
@@ -49,6 +103,7 @@ $(document).ready(function () {
       success: (response) => {
         if (response.success) {
           console.log(response.message);
+          loadCartData();
         } else {
           console.log(response.message);
         }

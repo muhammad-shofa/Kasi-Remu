@@ -31,18 +31,51 @@ class TransactionController extends BaseController
             'quantity' => 1
         ];
 
-        if ($this->tmpTransactionModel->save($data)) {
-            return $this->response->setJSON([
-                'success' => true,
-                'message' => 'Success saved data',
+        // cek apakah di db sudah ada item_id yang sama
+        $isAvailable = $this->tmpTransactionModel->where('item_id', $item_id)->first();
 
-            ]);
+        if (!empty($isAvailable)) {
+            $data['quantity'] = $isAvailable['quantity'] + 1;
+
+            if ($this->tmpTransactionModel->update($isAvailable['tmp_txn_id'], $data)) {
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => 'Success updated data',
+                    'message' => 'Success updated data'
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to updated data',
+                ]);
+            }
         } else {
-            return $this->response->setJSON([
-                'success' => false,
-                'message' => 'Failed to save data',
-            ]);
+            if ($this->tmpTransactionModel->save($data)) {
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => 'Success saved data',
+
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to save data',
+                ]);
+            }
         }
+
+        // if ($this->tmpTransactionModel->save($data)) {
+        //     return $this->response->setJSON([
+        //         'success' => true,
+        //         'message' => 'Success saved data',
+
+        //     ]);
+        // } else {
+        //     return $this->response->setJSON([
+        //         'success' => false,
+        //         'message' => 'Failed to save data',
+        //     ]);
+        // }
     }
 
     function getTmpTransaction()

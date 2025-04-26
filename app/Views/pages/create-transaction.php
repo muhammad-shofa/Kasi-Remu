@@ -51,7 +51,7 @@
                         </table>
 
                         <button class="btn-reset-tmp-txn btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#resetCartModal">
-                            <i class="nav-icon bi bi-trash"></i>
+                            <i class="bi bi-trash"></i>
                         </button>
                         <!-- </div> -->
                     </div>

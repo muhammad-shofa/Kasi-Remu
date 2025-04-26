@@ -63,19 +63,6 @@ class TransactionController extends BaseController
                 ]);
             }
         }
-
-        // if ($this->tmpTransactionModel->save($data)) {
-        //     return $this->response->setJSON([
-        //         'success' => true,
-        //         'message' => 'Success saved data',
-
-        //     ]);
-        // } else {
-        //     return $this->response->setJSON([
-        //         'success' => false,
-        //         'message' => 'Failed to save data',
-        //     ]);
-        // }
     }
 
     function getTmpTransaction()
@@ -90,14 +77,46 @@ class TransactionController extends BaseController
         ]);
     }
 
+    function minQty()
+    {
+        $tmp_txn_id = $this->request->getPost();
+
+        $data_tmp = $this->tmpTransactionModel->where('tmp_txn_id', $tmp_txn_id)->first();
+
+        // cek apakah quantity tidak lebih besar dari 1
+        if (!empty($data_tmp) && $data_tmp['quantity'] > 1) {
+            $data_tmp['quantity'] = $data_tmp['quantity'] - 1;
+
+            if ($this->tmpTransactionModel->update($tmp_txn_id, $data_tmp)) {
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => 'Success updated quantity data'
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to update quantity data'
+                ]);
+            }
+        } else {
+            return $this->deleteItemCart($tmp_txn_id);
+        }
+    }
+
     public function resetCart()
     {
         $this->tmpTransactionModel->truncate();
         // $this->tmpTransactionModel->delete();
 
         /* note:
-        truncate = hapus data beserta reset increment
-        delete = hapus data tidak dengan increment
+        truncate = hapus data beserta reset increment, menghapus semua data
+        delete = hapus data tidak dengan increment, bisa data tertentu
+        */
+
+        /*
+        future update: 
+        gunakan delete() untuk reset cart dan berikan pengecekan untuk user_id yang sedang melakukan aksi reset,
+        karena kedepannya bisa saja ada kasir lebih dari 1 dan truncate tidak cocok digunakan 
         */
 
         return $this->response->setJSON([

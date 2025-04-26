@@ -134,9 +134,8 @@ $(document).ready(function () {
       dataType: "json",
       success: (response) => {
         if (response.success) {
-          loadCartData();
           console.log(response.message);
-          // loadCartData(true);
+          loadCartData(true);
         } else {
           console.log(response.message);
         }

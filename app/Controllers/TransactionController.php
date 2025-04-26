@@ -83,7 +83,7 @@ class TransactionController extends BaseController
 
         $data_tmp = $this->tmpTransactionModel->where('tmp_txn_id', $tmp_txn_id)->first();
 
-        // cek apakah quantity tidak lebih besar dari 1
+        // cek apakah quantity lebih besar dari 1
         if (!empty($data_tmp) && $data_tmp['quantity'] > 1) {
             $data_tmp['quantity'] = $data_tmp['quantity'] - 1;
 
@@ -100,6 +100,30 @@ class TransactionController extends BaseController
             }
         } else {
             return $this->deleteItemCart($tmp_txn_id);
+        }
+    }
+
+    function addQty()
+    {
+        $tmp_txn_id = $this->request->getPost();
+
+        $data_tmp = $this->tmpTransactionModel->where('tmp_txn_id', $tmp_txn_id)->first();
+
+        // cek apakah data tmp tidak kosong
+        if (!empty($data_tmp)) {
+            $data_tmp['quantity'] = $data_tmp['quantity'] + 1;
+
+            if ($this->tmpTransactionModel->update($tmp_txn_id, $data_tmp)) {
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => 'Success updated quantity data'
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to update quantity data'
+                ]);
+            }
         }
     }
 

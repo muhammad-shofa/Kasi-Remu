@@ -66,7 +66,8 @@ $(document).ready(function () {
                         <i class="bi bi-dash"></i>
                     </button>
                     ${tmp_txn["quantity"]}
-                    <button class="btn-add-qty btn btn-sm btn-secondary rounded">
+                    <button class="btn-add-qty btn btn-sm btn-secondary rounded"
+                    data-tmp_txn_id="${tmp_txn["tmp_txn_id"]}">
                         <i class="bi bi-plus"></i>
                     </button>
                   </td>
@@ -130,13 +131,40 @@ $(document).ready(function () {
   });
 
   // kurangi quantity item
-  $(document).on("click", ".btn-min-qty ", function () {
+  $(document).on("click", ".btn-min-qty", function () {
     let tmp_txn_id = $(this).data("tmp_txn_id");
 
     // console.log(tmp_txn_id);
 
     $.ajax({
       url: "/api/transaction/min-qty",
+      type: "POST",
+      dataType: "json",
+      data: { tmp_txn_id: tmp_txn_id },
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          loadCartData(true);
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
+
+  // tambah quantity item
+  $(document).on("click", ".btn-add-qty", function () {
+    let tmp_txn_id = $(this).data("tmp_txn_id");
+
+    // console.log(tmp_txn_id);
+
+    $.ajax({
+      url: "/api/transaction/add-qty",
       type: "POST",
       dataType: "json",
       data: { tmp_txn_id: tmp_txn_id },

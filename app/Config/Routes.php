@@ -8,9 +8,9 @@ use CodeIgniter\Router\RouteCollection;
 
 //  pages endpoint
 $routes->get('/', 'PagesController::login');
-$routes->get('/dashboard', 'PagesController::dashboard');
-$routes->get('/user-management', 'PagesController::userManagement');
-$routes->get('/item-management', 'PagesController::itemManagement');
+$routes->get('/dashboard', 'PagesController::dashboard', ['filter' => 'role:admin,cashier,manager']);
+$routes->get('/user-management', 'PagesController::userManagement', ['filter' => 'role:admin']);
+$routes->get('/item-management', 'PagesController::itemManagement', ['filter' => 'role:admin']);
 $routes->get('/create-transaction', 'PagesController::createTransaction', ['filter' => 'role:admin,cashier']);
 $routes->get('/unauthorized', 'PagesController::unauthorized');
 

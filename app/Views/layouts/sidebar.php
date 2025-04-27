@@ -28,7 +28,7 @@
                 data-accordion="false">
                 <!-- dashboard -->
                 <li class="nav-item">
-                    <a href="/" class="nav-link">
+                    <a href="/dashboard" class="nav-link">
                         <i class="nav-icon bi bi-bar-chart"></i>
                         <p>Dashboard</p>
                     </a>

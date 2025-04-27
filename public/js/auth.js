@@ -12,9 +12,9 @@ $(document).ready(() => {
       success: (response) => {
         if (response.success) {
           console.log(response.message);
-          // future update: show popup login success 
+          // future update: show popup login success
           // console.log();
-          window.location.href = "/";
+          window.location.href = "/dashboard";
         } else {
           console.log(response.message);
         }

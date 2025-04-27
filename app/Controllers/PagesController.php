@@ -38,4 +38,11 @@ class PagesController extends BaseController
 
         return view("pages/auth/login");
     }
+
+    public function unauthorized()
+    {
+        $data = ['title' => 'Login'];
+
+        return view("pages/unauthorized");
+    }
 }

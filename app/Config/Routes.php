@@ -10,8 +10,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'PagesController::dashboard');
 $routes->get('/user-management', 'PagesController::userManagement');
 $routes->get('/item-management', 'PagesController::itemManagement');
-$routes->get('/create-transaction', 'PagesController::createTransaction');
+$routes->get('/create-transaction', 'PagesController::createTransaction', ['filter' => 'role:admin,cashier']);
 $routes->get('/login', 'PagesController::login');
+$routes->get('/unauthorized', 'PagesController::unauthorized');
 
 // auth endpoint
 $routes->post('/api/auth/login', 'UserController::login');

@@ -4,15 +4,18 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\TmpTransactionModel;
+use App\Models\TransactionModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class TransactionController extends BaseController
 {
     protected $tmpTransactionModel;
+    protected $transactionModel;
 
     public function __construct()
     {
         $this->tmpTransactionModel = new TmpTransactionModel();
+        $this->transactionModel = new TransactionModel();
     }
 
     public function addCatalogItem()
@@ -157,5 +160,25 @@ class TransactionController extends BaseController
             'success' => true,
             'message' => 'Item deleted successfully'
         ]);
+    }
+
+    public function completeTransaction()
+    {
+        $transactionData = $this->request->getPost();
+        $transactionData['user_id'] = session()->get('user_id');
+
+        if ($this->transactionModel->save($transactionData)) {
+            $this->tmpTransactionModel->truncate();
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Transaction completed successfully'
+            ]);
+        } else {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Failed to complete transaction'
+            ]);
+        }
     }
 }

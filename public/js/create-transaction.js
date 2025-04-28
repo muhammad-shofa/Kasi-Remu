@@ -256,4 +256,35 @@ $(document).ready(function () {
       },
     });
   });
+
+  // submit transaction
+  $(document).on("click", ".btn-complete-transaction", function () {
+    let transactionData = {
+      total_amount: $("#totalPrice").text(),
+      cash_received: $("#cash_received").val(),
+      change_returned: $("#change").text(),
+    };
+
+    $.ajax({
+      url: "/api/transaction/complete-transaction",
+      type: "POST",
+      dataType: "json",
+      data: transactionData,
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          loadCartData(true);
+          $("#cash_received").val(0);
+          $("#change").text(0);
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
 });

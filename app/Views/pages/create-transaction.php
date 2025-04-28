@@ -34,7 +34,6 @@
                     <div class="cart border p-3 shadow-sm" style="min-height: 400px;">
                         <h4>Cart</h4>
 
-                        <!-- <div class="d-flex flex-wrap justify-content-around" id="cart-item"> -->
                         <table class="table border">
                             <thead>
                                 <tr>
@@ -42,7 +41,7 @@
                                     <th>Name</th>
                                     <th>Prc</th>
                                     <th>Qty</th>
-                                    <th>Total</th>
+                                    <th>Sub Total</th>
                                     <th style="width: 30px">Action</th>
                                 </tr>
                             </thead>
@@ -69,10 +68,14 @@
                             </tfoot>
                         </table>
 
-                        <button class="btn-reset-tmp-txn btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#resetCartModal">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                        <!-- </div> -->
+                        <div class="d-flex justify-content-between">
+                            <button class="btn-reset-tmp-txn btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#resetCartModal">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button class="btn-complete-transaction btn btn-success rounded">
+                                Complete Transaction
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

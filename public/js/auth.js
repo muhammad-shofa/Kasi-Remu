@@ -26,4 +26,25 @@ $(document).ready(() => {
       },
     });
   });
+
+  $(".btn-logout").on("click", function () {
+    $.ajax({
+      url: "/api/auth/logout",
+      type: "GET",
+      dataType: "json",
+      success: (response) => {
+        if (response.success) {
+          console.log(response.message);
+          window.location.href = "/";
+        } else {
+          console.log(response.message);
+        }
+      },
+      error: (xhr, error, status) => {
+        console.log(xhr);
+        console.log(error);
+        console.log(status);
+      },
+    });
+  });
 });

@@ -104,4 +104,13 @@ class UserController extends BaseController
 
         return $this->response->setJSON(['success' => false, 'message' => 'Username or password invalid']);
     }
+
+    public function logout()
+    {
+        session()->destroy();
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Logout Successfull'
+        ]);
+    }
 }

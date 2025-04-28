@@ -16,6 +16,7 @@ $routes->get('/unauthorized', 'PagesController::unauthorized');
 
 // auth endpoint
 $routes->post('/api/auth/login', 'UserController::login');
+$routes->get('/api/auth/logout', 'UserController::logout');
 
 // main dashboard endpoint
 $routes->get("/api/dashboard/count-data", "DashboardController::countData");

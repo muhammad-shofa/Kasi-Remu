@@ -74,7 +74,12 @@
                     </a>
                 </li>
 
-
+                <!-- logout -->
+                <li class="nav-item">
+                    <div class="nav-link">
+                        <button class="btn-logout btn btn-sm btn-danger">Logout</button>
+                    </div>
+                </li>
 
             </ul>
             <!--end::Sidebar Menu-->
@@ -83,3 +88,7 @@
     <!--end::Sidebar Wrapper-->
 
 </aside>
+
+<?= $this->section("script") ?>
+<script src="js/auth.js"></script>
+<?= $this->endSection() ?>

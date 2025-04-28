@@ -32,9 +32,8 @@ $(document).ready(function () {
     });
   }
 
-  // calculate total price
-  // function calculate_totalPrice() {
-  $(document).on("input", "#cash_received", function () {
+  // calculate total price function
+  function calculate_totalPrice() {
     let total_price = $("#totalPrice").text();
     let cash_received = $("#cash_received").val();
     let change = cash_received - total_price;
@@ -47,8 +46,12 @@ $(document).ready(function () {
     } else {
       $("#change").text(change);
     }
+  }
+
+  // calculate total price
+  $(document).on("input", "#cash_received", function () {
+    calculate_totalPrice();
   });
-  // }
 
   // load cart data
   function loadCartData(isReset) {
@@ -105,8 +108,8 @@ $(document).ready(function () {
 
             $("#cartTableData").html(row);
             $("#totalPrice").text(total_price);
-            // calculate_totalPrice();
           });
+          calculate_totalPrice();
         } else {
           console.log(response.message);
         }

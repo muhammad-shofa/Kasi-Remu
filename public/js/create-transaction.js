@@ -32,6 +32,24 @@ $(document).ready(function () {
     });
   }
 
+  // calculate total price
+  // function calculate_totalPrice() {
+  $(document).on("input", "#cash_received", function () {
+    let total_price = $("#totalPrice").text();
+    let cash_received = $("#cash_received").val();
+    let change = cash_received - total_price;
+    // console.log(total_price);
+    // console.log(cash_received);
+    // console.log(change);
+
+    if (change < 0) {
+      $("#change").text(0);
+    } else {
+      $("#change").text(change);
+    }
+  });
+  // }
+
   // load cart data
   function loadCartData(isReset) {
     isReset ? $("#cartTableData").empty() : "";
@@ -46,6 +64,7 @@ $(document).ready(function () {
 
           let no = 0;
           let row = "";
+          let total_price = 0;
 
           response.data.forEach((tmp_txn) => {
             no++;
@@ -82,7 +101,11 @@ $(document).ready(function () {
                   </td>
               </tr>`;
 
+            total_price += tmp_txn["price"] * tmp_txn["quantity"];
+
             $("#cartTableData").html(row);
+            $("#totalPrice").text(total_price);
+            // calculate_totalPrice();
           });
         } else {
           console.log(response.message);

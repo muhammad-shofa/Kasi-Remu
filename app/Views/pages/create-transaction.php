@@ -43,11 +43,30 @@
                                     <th>Prc</th>
                                     <th>Qty</th>
                                     <th>Total</th>
-                                    <th>Action</th>
+                                    <th style="width: 30px">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="cartTableData">
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bold">Total : </td>
+                                    <td id="totalPrice" class="fw-bold">0</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bold">Cash Received : </td>
+                                    <td id="cashReceived" class="fw-bold" style="width: 200px">
+                                        <input type="number" name="cash_received" id="cash_received" class="form-control" placeholder="Cash Received">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-end fw-bold">Change : </td>
+                                    <td id="change" class="fw-bold">0</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
                         </table>
 
                         <button class="btn-reset-tmp-txn btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#resetCartModal">

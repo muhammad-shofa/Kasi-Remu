@@ -229,4 +229,24 @@ class TransactionController extends BaseController
             'message' => 'Transaction completed successfully'
         ]);
     }
+
+    public function getMyTransactions()
+    {
+        $user_id = session()->get('user_id');
+
+        // $data = $this->transactionModel->select('transactions.*, users.name as user_name')->join('users', 'users.user_id = transactions.user_id')->where('transactions.user_id', $user_id)->orderBy('created_at', 'ASC')->findAll();
+        $data = $this->transactionModel
+            ->select('transactions.*, SUM(transaction_details.quantity) as total_items')
+            ->join('transaction_details', 'transaction_details.transaction_id = transactions.transaction_id', 'left')
+            ->where('transactions.user_id', $user_id)
+            ->groupBy('transactions.transaction_id')
+            ->orderBy('transactions.created_at', 'ASC')
+            ->findAll();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $data,
+            'message' => 'My Transaction data retrieved successfully'
+        ]);
+    }
 }

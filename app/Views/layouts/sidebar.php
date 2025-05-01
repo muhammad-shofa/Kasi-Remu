@@ -60,7 +60,7 @@
 
                 <!-- my transactions -->
                 <li class="nav-item">
-                    <a href="#0" class="nav-link">
+                    <a href="/my-transactions" class="nav-link">
                         <i class="nav-icon bi bi-receipt-cutoff"></i>
                         <p>My Transactions</p>
                     </a>
@@ -71,6 +71,14 @@
                     <a href="#0" class="nav-link">
                         <i class="nav-icon bi bi-journal-text"></i>
                         <p>All Transactions</p>
+                    </a>
+                </li>
+
+                <!-- transaction details -->
+                <li class="nav-item">
+                    <a href="#0" class="nav-link">
+                        <i class="nav-icon bi bi-journal-text"></i>
+                        <p>Transaction Details</p>
                     </a>
                 </li>
 

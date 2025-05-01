@@ -276,6 +276,7 @@ $(document).ready(function () {
           loadCartData(true);
           $("#cash_received").val(0);
           $("#change").text(0);
+          $("#totalPrice").text(0);
         } else {
           console.log(response.message);
         }

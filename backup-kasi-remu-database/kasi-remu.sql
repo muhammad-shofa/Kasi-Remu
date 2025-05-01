@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2025 at 01:57 PM
+-- Generation Time: May 01, 2025 at 09:43 AM
 -- Server version: 8.0.41-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -40,8 +40,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`category_id`, `category_name`, `created_at`, `updated_at`) VALUES
 (1, 'School and Office', '2025-04-15 22:21:07', '2025-04-15 22:21:07'),
-(2, 'Fruits', '2025-04-15 22:21:07', '2025-04-15 22:21:07'),
-(3, 'Anjay', '2025-04-21 13:58:40', '2025-04-21 13:58:40');
+(2, 'Fruits', '2025-04-15 22:21:07', '2025-04-15 22:21:07');
 
 -- --------------------------------------------------------
 
@@ -68,7 +67,8 @@ INSERT INTO `items` (`item_id`, `category_id`, `name`, `price`, `stock`, `create
 (13, 1, 'Pen', 5000, 345, '2025-04-15 23:08:35', '2025-04-15 23:08:35'),
 (14, 2, 'Mango', 7000, 524, '2025-04-15 23:08:35', '2025-04-15 23:08:35'),
 (16, 2, 'Apple', 4000, 111, '2025-04-18 13:04:42', '2025-04-18 13:04:42'),
-(18, 2, 'Orange', 4000, 444, '2025-04-20 11:57:13', '2025-04-20 11:57:13');
+(18, 2, 'Orange', 4000, 444, '2025-04-20 11:57:13', '2025-04-20 11:57:13'),
+(19, 2, 'Watermelon', 27000, 525, '2025-04-24 14:48:58', '2025-04-24 14:48:58');
 
 -- --------------------------------------------------------
 
@@ -85,13 +85,6 @@ CREATE TABLE `tmp_transactions` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `tmp_transactions`
---
-
-INSERT INTO `tmp_transactions` (`tmp_txn_id`, `user_id`, `item_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 11, 10, 1, '2025-04-24 13:44:10', '2025-04-24 13:44:10');
-
 -- --------------------------------------------------------
 
 --
@@ -101,6 +94,7 @@ INSERT INTO `tmp_transactions` (`tmp_txn_id`, `user_id`, `item_id`, `quantity`, 
 CREATE TABLE `transactions` (
   `transaction_id` int NOT NULL,
   `user_id` int NOT NULL,
+  `txn_code` varchar(50) NOT NULL,
   `total_amount` int NOT NULL,
   `cash_received` int NOT NULL,
   `change_returned` int NOT NULL,
@@ -109,6 +103,14 @@ CREATE TABLE `transactions` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`transaction_id`, `user_id`, `txn_code`, `total_amount`, `cash_received`, `change_returned`, `status`, `created_at`, `updated_at`) VALUES
+(27, 12, 'TXN-173b4f11-86e9-4721-9f67-d6822b5849fb', 41000, 50000, 9000, 'completed', '2025-05-01 08:57:28', '2025-05-01 08:57:28'),
+(28, 12, 'TXN-9b96901a-891f-449d-9c94-f021031cebd4', 24000, 40000, 16000, 'completed', '2025-05-01 09:40:00', '2025-05-01 09:40:00');
+
 -- --------------------------------------------------------
 
 --
@@ -116,7 +118,7 @@ CREATE TABLE `transactions` (
 --
 
 CREATE TABLE `transaction_details` (
-  `detail_id` int NOT NULL,
+  `txn_detail_id` int NOT NULL,
   `transaction_id` int NOT NULL,
   `item_id` int NOT NULL,
   `quantity` int NOT NULL,
@@ -124,6 +126,19 @@ CREATE TABLE `transaction_details` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `transaction_details`
+--
+
+INSERT INTO `transaction_details` (`txn_detail_id`, `transaction_id`, `item_id`, `quantity`, `subtotal`, `created_at`, `updated_at`) VALUES
+(35, 27, 13, 1, 5000, '2025-05-01 08:57:28', '2025-05-01 08:57:28'),
+(36, 27, 14, 3, 21000, '2025-05-01 08:57:28', '2025-05-01 08:57:28'),
+(37, 27, 18, 2, 8000, '2025-05-01 08:57:28', '2025-05-01 08:57:28'),
+(38, 27, 10, 1, 7000, '2025-05-01 08:57:28', '2025-05-01 08:57:28'),
+(39, 28, 13, 1, 5000, '2025-05-01 09:40:00', '2025-05-01 09:40:00'),
+(40, 28, 14, 1, 7000, '2025-05-01 09:40:00', '2025-05-01 09:40:00'),
+(41, 28, 18, 3, 12000, '2025-05-01 09:40:00', '2025-05-01 09:40:00');
 
 -- --------------------------------------------------------
 
@@ -191,7 +206,7 @@ ALTER TABLE `transactions`
 -- Indexes for table `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  ADD PRIMARY KEY (`detail_id`),
+  ADD PRIMARY KEY (`txn_detail_id`),
   ADD KEY `transaction_id` (`transaction_id`),
   ADD KEY `item_id` (`item_id`);
 
@@ -211,31 +226,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `item_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tmp_transactions`
 --
 ALTER TABLE `tmp_transactions`
-  MODIFY `tmp_txn_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tmp_txn_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `transaction_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  MODIFY `detail_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `txn_detail_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`

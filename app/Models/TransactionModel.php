@@ -14,6 +14,7 @@ class TransactionModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'user_id',
+        'txn_code',
         'total_amount',
         'cash_received',
         'change_returned',

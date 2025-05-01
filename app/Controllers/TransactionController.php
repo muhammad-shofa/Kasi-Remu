@@ -7,6 +7,7 @@ use App\Models\TmpTransactionModel;
 use App\Models\TransactionModel;
 use App\Models\TxnDetailModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use Ramsey\Uuid\Uuid;
 
 class TransactionController extends BaseController
 {
@@ -169,7 +170,9 @@ class TransactionController extends BaseController
     {
         $transactionData = $this->request->getPost();
         $user_id = session()->get('user_id');
+        $txn_code = 'TXN-' . Uuid::uuid4()->toString();;
         $transactionData['user_id'] = $user_id;
+        $transactionData['txn_code'] = $txn_code;
 
         if (!$this->transactionModel->insert($transactionData)) {
             return $this->response->setJSON([
@@ -212,7 +215,6 @@ class TransactionController extends BaseController
                 'transaction_id' => $transaction_id,
                 'item_id' => $tmpItem['item_id'],
                 'quantity' => $tmpItem['quantity'],
-                // 'price' => $tmpItem['price'],
                 'subtotal' => $tmpItem['quantity'] * $price,
             ];
 

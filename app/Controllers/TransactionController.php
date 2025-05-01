@@ -5,17 +5,20 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\TmpTransactionModel;
 use App\Models\TransactionModel;
+use App\Models\TxnDetailModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class TransactionController extends BaseController
 {
     protected $tmpTransactionModel;
     protected $transactionModel;
+    protected $txnDetailModel;
 
     public function __construct()
     {
         $this->tmpTransactionModel = new TmpTransactionModel();
         $this->transactionModel = new TransactionModel();
+        $this->txnDetailModel = new TxnDetailModel();
     }
 
     public function addCatalogItem()
@@ -165,20 +168,63 @@ class TransactionController extends BaseController
     public function completeTransaction()
     {
         $transactionData = $this->request->getPost();
-        $transactionData['user_id'] = session()->get('user_id');
+        $user_id = session()->get('user_id');
+        $transactionData['user_id'] = $user_id;
 
-        if ($this->transactionModel->save($transactionData)) {
-            $this->tmpTransactionModel->truncate();
-
-            return $this->response->setJSON([
-                'success' => true,
-                'message' => 'Transaction completed successfully'
-            ]);
-        } else {
+        if (!$this->transactionModel->insert($transactionData)) {
             return $this->response->setJSON([
                 'success' => false,
                 'message' => 'Failed to complete transaction'
             ]);
+
+            // $this->tmpTransactionModel->truncate();
+
+            // return $this->response->setJSON([
+            //     'success' => true,
+            //     'message' => 'Transaction completed successfully'
+            // ]);
         }
+
+        // ambil transaction_id yang dihasilkan
+        $transaction_id = $this->transactionModel->getInsertID();
+        if (!isset($transaction_id)) {
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Transaction ID not found',
+                'transaction_id' => $transaction_id
+            ]);
+        }
+
+        // ambil semua data berdasarkan user_id dari tmp_transactions
+        $tmpTransactionData = $this->tmpTransactionModel->select('items.price, tmp_transactions.*')->join('items', 'items.item_id = tmp_transactions.item_id')->where('user_id', $user_id)->findAll();
+        if (empty($tmpTransactionData)) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Keranjang kosong.'
+            ]);
+        }
+
+        // simpan data ke transaction_details
+        foreach ($tmpTransactionData as $tmpItem) {
+            $price = $tmpItem['price'];
+
+            $detailData = [
+                'transaction_id' => $transaction_id,
+                'item_id' => $tmpItem['item_id'],
+                'quantity' => $tmpItem['quantity'],
+                // 'price' => $tmpItem['price'],
+                'subtotal' => $tmpItem['quantity'] * $price,
+            ];
+
+            $this->txnDetailModel->insert($detailData);
+        }
+
+        // kosongkan data
+        $this->tmpTransactionModel->where('user_id',)->truncate();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Transaction completed successfully'
+        ]);
     }
 }

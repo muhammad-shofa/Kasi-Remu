@@ -1,3 +1,27 @@
+<?php
+
+$role = session()->get('role');
+$menus = [
+    'admin' => [
+        ['title' => 'Dashboard', 'icon' => 'bi bi-bar-chart', 'url' => '/dashboard'],
+        ['title' => 'User Management', 'icon' => 'bi bi-person', 'url' => '/user-management'],
+        ['title' => 'Item Management', 'icon' => 'bi bi-box-seam', 'url' => '/item-management'],
+        ['title' => 'Create Transaction', 'icon' => 'bi bi-receipt', 'url' => '/create-transaction'],
+        ['title' => 'My Transactions', 'icon' => 'bi bi-receipt-cutoff', 'url' => '/my-transactions'],
+        ['title' => 'All Transactions', 'icon' => 'bi bi-journal-text', 'url' => '#0'],
+        // ['title' => 'Transaction Details', 'icon' => 'fas fa-receipt', 'url' => '#0'],
+    ],
+    'cashier' => [
+        ['title' => 'Dashboard', 'icon' => 'bi bi-bar-chart', 'url' => '/dashboard'],
+        ['title' => 'Create Transaction', 'icon' => 'bi bi-receipt', 'url' => '/create-transaction'],
+        ['title' => 'My Transactions', 'icon' => 'bi bi-receipt-cutoff', 'url' => '/my-transactions'],
+    ]
+];
+
+$activeMenu = $menus[$role] ?? [];
+
+?>
+
 <aside class="app-sidebar bg-white" data-bs-theme="light">
 
     <!--begin::Sidebar Brand-->
@@ -26,61 +50,16 @@
                 data-lte-toggle="treeview"
                 role="menu"
                 data-accordion="false">
-                <!-- dashboard -->
-                <li class="nav-item">
-                    <a href="/dashboard" class="nav-link">
-                        <i class="nav-icon bi bi-bar-chart"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
 
-                <!-- user management -->
-                <li class="nav-item">
-                    <a href="/user-management" class="nav-link">
-                        <i class="nav-icon bi bi-person"></i>
-                        <p>User Management</p>
-                    </a>
-                </li>
-
-                <!-- item management -->
-                <li class="nav-item">
-                    <a href="/item-management" class="nav-link">
-                        <i class="nav-icon bi bi-box-seam"></i>
-                        <p>Item Management</p>
-                    </a>
-                </li>
-
-                <!-- create transaction -->
-                <li class="nav-item">
-                    <a href="/create-transaction" class="nav-link">
-                        <i class="nav-icon bi bi-receipt"></i>
-                        <p>Create Transaction</p>
-                    </a>
-                </li>
-
-                <!-- my transactions -->
-                <li class="nav-item">
-                    <a href="/my-transactions" class="nav-link">
-                        <i class="nav-icon bi bi-receipt-cutoff"></i>
-                        <p>My Transactions</p>
-                    </a>
-                </li>
-
-                <!-- all transactions -->
-                <li class="nav-item">
-                    <a href="#0" class="nav-link">
-                        <i class="nav-icon bi bi-journal-text"></i>
-                        <p>All Transactions</p>
-                    </a>
-                </li>
-
-                <!-- transaction details -->
-                <li class="nav-item">
-                    <a href="#0" class="nav-link">
-                        <i class="nav-icon bi bi-journal-text"></i>
-                        <p>(Model / Page) Transaction Details</p>
-                    </a>
-                </li>
+                <?php foreach ($activeMenu as $menu) { ?>
+                    <!-- dashboard -->
+                    <li class="nav-item">
+                        <a href="<?= $menu['url'] ?>" class="nav-link">
+                            <i class="nav-icon <?= $menu['icon'] ?>"></i>
+                            <p><?= $menu['title'] ?></p>
+                        </a>
+                    </li>
+                <?php } ?>
 
                 <!-- logout -->
                 <li class="nav-item">

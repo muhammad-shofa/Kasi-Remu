@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\ItemModel;
 use App\Models\TmpTransactionModel;
 use App\Models\TransactionModel;
 use App\Models\TxnDetailModel;
@@ -14,12 +15,14 @@ class TransactionController extends BaseController
     protected $tmpTransactionModel;
     protected $transactionModel;
     protected $txnDetailModel;
+    protected $itemModel;
 
     public function __construct()
     {
         $this->tmpTransactionModel = new TmpTransactionModel();
         $this->transactionModel = new TransactionModel();
         $this->txnDetailModel = new TxnDetailModel();
+        $this->itemModel = new ItemModel();
     }
 
     public function addCatalogItem()
@@ -219,6 +222,17 @@ class TransactionController extends BaseController
             ];
 
             $this->txnDetailModel->insert($detailData);
+
+            // kurangi quantity dari table items
+            $item = $this->itemModel->where('item_id', $tmpItem['item_id'])->first();
+            if ($item) {
+                $item['stock'] -= $tmpItem['quantity'];
+                if ($item['stock'] <= 0) {
+                    $this->itemModel->delete($tmpItem['item_id']);
+                } else {
+                    $this->itemModel->update($tmpItem['item_id'], $item);
+                }
+            }
         }
 
         // kosongkan data

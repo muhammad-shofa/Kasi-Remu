@@ -202,7 +202,10 @@ class TransactionController extends BaseController
         }
 
         // ambil semua data berdasarkan user_id dari tmp_transactions
-        $tmpTransactionData = $this->tmpTransactionModel->select('items.price, tmp_transactions.*')->join('items', 'items.item_id = tmp_transactions.item_id')->where('user_id', $user_id)->findAll();
+        $tmpTransactionData = $this->tmpTransactionModel
+            ->select('items.price, tmp_transactions.*')
+            ->join('items', 'items.item_id = tmp_transactions.item_id')
+            ->where('user_id', $user_id)->findAll();
         if (empty($tmpTransactionData)) {
             return $this->response->setJSON([
                 'success' => false,
@@ -261,6 +264,24 @@ class TransactionController extends BaseController
             'success' => true,
             'data' => $data,
             'message' => 'My Transaction data retrieved successfully'
+        ]);
+    }
+
+    public function getTransactionDetail($transaction_id = 0)
+    {
+        $data = $this->txnDetailModel
+            ->select('users.name as cashier_name, items.name, items.price, categories.category_name, transaction_details.*, transactions.txn_code, transactions.created_at, transactions.status')
+            ->join('items', 'items.item_id = transaction_details.item_id')
+            ->join('categories', 'categories.category_id = items.category_id')
+            ->join('transactions', 'transactions.transaction_id = transaction_details.transaction_id')
+            ->join('users', 'users.user_id = transactions.user_id')
+            ->where('transaction_details.transaction_id', $transaction_id)
+            ->findAll();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $data,
+            'message' => 'Transaction detail data retrieved successfully'
         ]);
     }
 }

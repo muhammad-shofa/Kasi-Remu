@@ -49,3 +49,4 @@ $routes->post('/api/transaction/add-qty', 'TransactionController::addQty');
 $routes->delete('/api/transaction/reset-cart', 'TransactionController::resetCart');
 $routes->delete('/api/transaction/delete-item-cart/(:num)', 'TransactionController::deleteItemCart/$1');
 $routes->post('/api/transaction/complete-transaction', 'TransactionController::completeTransaction');
+$routes->get('/api/transaction/get-transaction-detail/(:num)', 'TransactionController::getTransactionDetail/$1');

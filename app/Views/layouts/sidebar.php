@@ -78,7 +78,7 @@
                 <li class="nav-item">
                     <a href="#0" class="nav-link">
                         <i class="nav-icon bi bi-journal-text"></i>
-                        <p>Transaction Details</p>
+                        <p>(Model / Page) Transaction Details</p>
                     </a>
                 </li>
 

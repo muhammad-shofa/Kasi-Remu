@@ -49,6 +49,44 @@
                 </div>
                 <!-- /.card-body -->
             </div>
+
+            <!-- masukkan modal body -->
+            <?php ob_start() ?>
+            <!-- content informasi umum transaksi dan tabel -->
+            <p id="txn_detail_code"></p>
+            <p id="txn_detail_date"></p>
+            <p id="txn_detail_cashier_name"></p>
+            <p id="txn_detail_status"></p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">No</th>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Sub Total</th>
+                    </tr>
+                </thead>
+                <tbody id="viewDetailsTableData">
+                </tbody>
+            </table>
+            <?php $modalBodyAdd = ob_get_clean() ?>
+
+            <!-- masukkan modal footer -->
+            <?php ob_start() ?>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            <?php $modalFooterAdd = ob_get_clean() ?>
+
+            <!-- kirim ke layouts/modal -->
+            <?= view("layouts/modal", [
+                'modalXl' => 'modal-xl',
+                'modalId' => 'viewDetailsModal',
+                'modalTitle' => 'Transaction Details',
+                'modalBody' => $modalBodyAdd,
+                'modalFooter' => $modalFooterAdd
+            ]) ?>
+
         </div>
         <!--end::Container-->
     </div>

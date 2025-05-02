@@ -39,6 +39,13 @@ class PagesController extends BaseController
         return view("pages/my-transactions", $data);
     }
 
+    public function allTransactions()
+    {
+        $data = ['title' => "All Transactions"];
+
+        return view("pages/all-transactions", $data);
+    }
+
     public function login()
     {
         $data = ['title' => 'Login'];

@@ -13,6 +13,7 @@ $routes->get('/user-management', 'PagesController::userManagement', ['filter' =>
 $routes->get('/item-management', 'PagesController::itemManagement', ['filter' => 'role:admin']);
 $routes->get('/create-transaction', 'PagesController::createTransaction', ['filter' => 'role:admin,cashier']);
 $routes->get('/my-transactions', 'PagesController::myTransactions', ['filter' => 'role:admin,cashier']);
+$routes->get('/all-transactions', 'PagesController::allTransactions', ['filter' => 'role:admin']);
 $routes->get('/unauthorized', 'PagesController::unauthorized');
 
 // auth endpoint
@@ -44,6 +45,7 @@ $routes->get('/api/category/search', 'CategoryController::search');
 $routes->post('/api/transaction/add-catalog-item', 'TransactionController::addCatalogItem');
 $routes->get('/api/transaction/get-tmp-transaction', 'TransactionController::getTmpTransaction');
 $routes->get('/api/transaction/get-my-transactions', 'TransactionController::getMyTransactions');
+$routes->get('/api/transaction/get-all-transactions', 'TransactionController::getAllTransactions');
 $routes->post('/api/transaction/min-qty', 'TransactionController::minQty');
 $routes->post('/api/transaction/add-qty', 'TransactionController::addQty');
 $routes->delete('/api/transaction/reset-cart', 'TransactionController::resetCart');

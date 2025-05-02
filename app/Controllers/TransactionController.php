@@ -267,6 +267,23 @@ class TransactionController extends BaseController
         ]);
     }
 
+    public function getAllTransactions()
+    {
+        $data = $this->transactionModel
+            ->select('transactions.*, users.name as cashier_name, SUM(transaction_details.quantity) as total_items')
+            ->join('transaction_details', 'transaction_details.transaction_id = transactions.transaction_id', 'left')
+            ->join('users', 'users.user_id = transactions.user_id')
+            ->groupBy('transactions.transaction_id')
+            ->orderBy('transactions.created_at', 'ASC')
+            ->findAll();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => $data,
+            'message' => 'All Transaction data retrieved successfully'
+        ]);
+    }
+
     public function getTransactionDetail($transaction_id = 0)
     {
         $data = $this->txnDetailModel

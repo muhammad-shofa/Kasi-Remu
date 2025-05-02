@@ -8,7 +8,7 @@ $menus = [
         ['title' => 'Item Management', 'icon' => 'bi bi-box-seam', 'url' => '/item-management'],
         ['title' => 'Create Transaction', 'icon' => 'bi bi-receipt', 'url' => '/create-transaction'],
         ['title' => 'My Transactions', 'icon' => 'bi bi-receipt-cutoff', 'url' => '/my-transactions'],
-        ['title' => 'All Transactions', 'icon' => 'bi bi-journal-text', 'url' => '#0'],
+        ['title' => 'All Transactions', 'icon' => 'bi bi-journal-text', 'url' => '/all-transactions'],
         // ['title' => 'Transaction Details', 'icon' => 'fas fa-receipt', 'url' => '#0'],
     ],
     'cashier' => [
@@ -23,7 +23,6 @@ $activeMenu = $menus[$role] ?? [];
 ?>
 
 <aside class="app-sidebar bg-white" data-bs-theme="light">
-
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->

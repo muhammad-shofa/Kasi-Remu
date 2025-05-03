@@ -29,7 +29,6 @@ $(document).ready(function () {
                       </tr>
                       `;
           });
-          //   <button type="button" class="edit-action btn btn-warning" data-mytxn_id="${mytxn["mytxn_id"]}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
 
           $("#allTransactionsTableData").html(row);
         }

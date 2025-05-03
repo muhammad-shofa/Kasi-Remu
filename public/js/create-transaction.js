@@ -1,25 +1,28 @@
 $(document).ready(function () {
   // load catalog data
-  function loadCatalogData() {
+  function loadCatalogData(keyword = "") {
     $.ajax({
       url: "/api/item/get-items",
       type: "GET",
       dataType: "json",
+      data: { search: keyword },
       success: (response) => {
         if (response.success) {
           let content = "";
 
+          // console.log("Response data from get-items : " + response.data);
           // console.log("debuug load catalog data" + response.data[1]["price"]);
-          for (let i = 0; i <= 4; i++) {
+          // tampilkan item 5 pertama saja secara default
+          response.data.slice(0, 5).forEach((item) => {
             content += `
                       <div class="flex-grow-1 border p-3 m-3 shadow-sm" style="width: 200px;">
-                              <h5 class="mb-1">${response.data[i]["name"]}</h5>
-                              <p class="mb-2">Rp${response.data[i]["price"]}</p>
+                              <h5 class="mb-1">${item["name"]}</h5>
+                              <p class="mb-2">Rp${item["price"]}</p>
                               <div class="d-grid">
-                                  <button class="catalog-add-item btn btn-warning" data-item_id="${response.data[i]["item_id"]}">+</button>
+                                  <button class="catalog-add-item btn btn-warning" data-item_id="${item["item_id"]}">+</button>
                               </div>
                       </div>`;
-          }
+          });
 
           $("#catalog-item").html(content);
         }
@@ -287,5 +290,11 @@ $(document).ready(function () {
         console.log(status);
       },
     });
+  });
+
+  $("#searchCatalog").on("keyup", function () {
+    let keyword = $(this).val();
+    // console.log(keyword);
+    loadCatalogData(keyword);
   });
 });

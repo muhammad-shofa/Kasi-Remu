@@ -24,6 +24,10 @@
                 <div class="col-md-6 mb-3">
                     <div class="catalog border p-3 shadow-sm" style="min-height: 400px;">
                         <h4>Catalog</h4>
+                        <input type="text" class="form-control" id="searchCatalog" placeholder="Search Catalog">
+                        <div class="catalog-item" id="catalogItem">
+                            <!-- catalog item will be inserted here -->
+                        </div>
                         <div class="d-flex flex-wrap justify-content-around" id="catalog-item">
                             <p class="pt-5 mt-5"><b>No item yet</b></p>
                         </div>

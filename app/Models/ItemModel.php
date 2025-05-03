@@ -50,8 +50,13 @@ class ItemModel extends Model
     protected $afterDelete    = [];
 
     // Get all data item with category data
-    public function getItemsWithCategory()
+    public function getItemsWithCategory($search = null)
     {
-        return $this->select("items.*, categories.category_name")->join("categories", "categories.category_id = items.category_id")->findAll();
+        $builder = $this->select("items.*, categories.category_name")->join("categories", "categories.category_id = items.category_id");
+        if (!empty($search)) {
+            $builder->like('LOWER(items.name)', strtolower($search));
+        }
+
+        return $builder->findAll();
     }
 }

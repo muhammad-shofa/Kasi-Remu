@@ -17,8 +17,11 @@ class ItemController extends BaseController
 
     public function getItems()
     {
+        // 
+        $search = $this->request->getGet('search');
+
         // ambil data dari function di itemModel
-        $data = $this->itemModel->getItemsWithCategory();
+        $data = $this->itemModel->getItemsWithCategory($search);
 
         return $this->response->setJSON(['success' => true, 'data' => $data]);
     }

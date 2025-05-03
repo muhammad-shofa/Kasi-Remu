@@ -8,8 +8,9 @@ $(document).ready(function () {
         if (response.success) {
           $("#userCountData").html(response.userCount);
           $("#itemCountData").html(response.itemCount);
+          $("#myTransactionCountData").html(response.myTransactionCount);
+          $("#allTransactionCountData").html(response.allTransactionCount);
         } else {
-            
         }
       },
       error: (xhr, error, status) => {

@@ -66,7 +66,7 @@
                             </span>
                             <div class="info-box-content">
                                 <span class="info-box-text">My Transactions</span>
-                                <span class="info-box-number">50 (dummy)</span>
+                                <span class="info-box-number" id="myTransactionCountData">0</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -81,7 +81,7 @@
                         </span>
                         <div class="info-box-content">
                             <span class="info-box-text">All Transactions</span>
-                            <span class="info-box-number">400 (dummy)</span>
+                            <span class="info-box-number" id="allTransactionCountData">0</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
